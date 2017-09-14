@@ -1,3 +1,5 @@
+![Featured Screenshot: Asteroids](http://harrisonhough.com/wp-content/uploads/2017/05/Asteroids.png)
+
 # Ateroids Game
 A simple 3D remake of the old Asteroids game made in Unity
 
