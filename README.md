@@ -1,8 +1,8 @@
-# Jump Game
-A simple 2D platform game made in Unity 3D
+# Ateroids Game
+A simple 3D remake of the old Asteroids game made in Unity
 
 ## Description
-This game targeted for Mobile devices using a very simple 1 tough/tap type controls. I created this just as a short sprint for a bit of practice. Currently it is using art assets that are not my own but I will update once I finish my own.
+A 3D remake of the old Asteroids style space shooter. I created this in just a few days, I created all scripts and art assets myself. Also created some of the shaders.
 
 ## Credits
 Developed by Harrison Hough
