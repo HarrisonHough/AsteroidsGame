@@ -16,7 +16,9 @@ using UnityEngine;
 public class ParticleDestroy : MonoBehaviour {
 
     #region Variables
-    public float timeBuffer = 0.2f;
+    // Time to wait after particle sim completetion before destroying
+    [SerializeField] 
+    private float _timeBuffer = 0.2f;
     private ParticleSystem _particle;
     #endregion
 
@@ -41,7 +43,7 @@ public class ParticleDestroy : MonoBehaviour {
     /// <returns>IENumerator : Required for Coroutine</returns>
     IEnumerator AutoDestroy()
     {
-        yield return new WaitForSeconds(_particle.main.duration + timeBuffer);
+        yield return new WaitForSeconds(_particle.main.duration + _timeBuffer);
         Destroy(gameObject);
             
     }

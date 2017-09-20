@@ -17,11 +17,10 @@ using UnityEngine;
 /// </summary>
 public class DrawAngleRange : MonoBehaviour {
 
-    //
+    
     private SpawnPoint _sp;
     private GameObject _left;
     private GameObject _right;
-	// Use this for initialization
 
     /// <summary>
     /// Used for Initialization

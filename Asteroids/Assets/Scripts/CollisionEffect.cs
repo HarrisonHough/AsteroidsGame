@@ -17,11 +17,14 @@ public class CollisionEffect : MonoBehaviour {
 
     #region Public Variables
     //the effect to spawn on collision
-    public GameObject particleEffect;
-    public bool destroyOnCollision;
+    [SerializeField]
+    private GameObject particleEffect;
+    [SerializeField]
+    private bool destroyOnCollision;
 
     //the tag to check for on object collision
-    public string tagName;
+    [SerializeField]
+    private string tagName;
     #endregion
 
     #region Functions

@@ -16,13 +16,18 @@ using UnityEngine;
 /// 
 public class Player : MonoBehaviour {
         
-    [Range(0,5)]
-    public float rotateSpeed = 1;
-    public float thrustPower = 50;
-    public float stopSpeed = 2;
-    public GameObject explosion;
-    public GameObject shield;
-    public float shieldDuration;
+    [Range(0,5)][SerializeField]
+    private float _rotateSpeed = 1;
+    [SerializeField]
+    private float _thrustPower = 50;
+    [SerializeField]
+    private float _stopSpeed = 2;
+    [SerializeField]
+    private GameObject _explosion;
+    [SerializeField]
+    private GameObject _shield;
+    [SerializeField]
+    private float _shieldDuration;
 
     private Item _item;
     private Rigidbody _rb;
@@ -31,9 +36,17 @@ public class Player : MonoBehaviour {
     /// Use this for initialization
     /// </summary>
     void Start () {
-        _rb = GetComponent<Rigidbody>();
-        shield.SetActive(false);
+        Initialize();
 	}
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void Initialize()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _shield.SetActive(false);
+    }
 
     /// <summary>
     /// Called on collision to trigger Death function
@@ -87,7 +100,7 @@ public class Player : MonoBehaviour {
     /// <param name="value"></param>
     public void Rotate(float value) {
 
-        transform.Rotate(0, Time.deltaTime* value * (rotateSpeed * 100),0 );
+        transform.Rotate(0, Time.deltaTime* value * (_rotateSpeed * 100),0 );
     }
 
     /// <summary>
@@ -96,7 +109,7 @@ public class Player : MonoBehaviour {
     /// <param name="target"></param>
     public void MouseLook(Vector3 target) {
         target.y = 0;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, target, rotateSpeed/20,0.0F);
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, target, _rotateSpeed/20,0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
     }
 
@@ -109,7 +122,7 @@ public class Player : MonoBehaviour {
     public void Thrust(float value) {
 
         //move object by adding force behind it
-        _rb.AddForce(transform.forward * thrustPower);
+        _rb.AddForce(transform.forward * _thrustPower);
     }
 
     /// <summary>
@@ -137,10 +150,10 @@ public class Player : MonoBehaviour {
     /// <returns></returns>
     IEnumerator ShieldOn() {
 
-        shield.SetActive(true);
-        yield return new WaitForSeconds(shieldDuration);
+        _shield.SetActive(true);
+        yield return new WaitForSeconds(_shieldDuration);
 
         //TODO add warning for when shield about to run out
-        shield.SetActive(false);
+        _shield.SetActive(false);
     }
 }

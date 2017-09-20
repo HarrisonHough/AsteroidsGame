@@ -19,11 +19,16 @@ public class GameManager : MonoBehaviour {
     public static int lastScore;
     public static int highScore;
 
-    public GameObject playerPrefab;
-    public SpawnController spawner;
-    public UIControl uiControl;    
-    public int lives;    
-    public Player player;
+    [SerializeField]
+    private GameObject _playerPrefab;
+    [SerializeField]
+    private SpawnController _spawner;
+    [SerializeField]
+    private UIControl _uiControl;    
+    [SerializeField]
+    private int _lives;    
+    [SerializeField]
+    private Player _player;
 
     private SoundController _soundControl;
     private bool _gameOver = false;
@@ -73,9 +78,9 @@ public class GameManager : MonoBehaviour {
         else
             highScore = PlayerPrefs.GetInt("HighScore");
 
-        if (player == null)
-            player = FindObjectOfType<Player>();
-        player.gameObject.SetActive(false);
+        if (_player == null)
+            _player = FindObjectOfType<Player>();
+        _player.gameObject.SetActive(false);
         _soundControl = GetComponent<SoundController>();
     }
 
@@ -85,10 +90,10 @@ public class GameManager : MonoBehaviour {
     void Start() {
         //check for null references
         //assign if null
-        if (spawner == null)
-            spawner = FindObjectOfType<SpawnController>();
-        if (uiControl == null)
-            uiControl = FindObjectOfType<UIControl>();
+        if (_spawner == null)
+            _spawner = FindObjectOfType<SpawnController>();
+        if (_uiControl == null)
+            _uiControl = FindObjectOfType<UIControl>();
     }
 
     /// <summary>
@@ -106,11 +111,11 @@ public class GameManager : MonoBehaviour {
                     break;
                 case 1:
                     AddScore(25);
-                    spawner.SpawnSmallAsteroid(asteroid.transform.position);
+                    _spawner.SpawnSmallAsteroid(asteroid.transform.position);
                     break;
                 case 2:
                     AddScore(50);
-                    spawner.SpawnMediumAsteroid(asteroid.transform.position);
+                    _spawner.SpawnMediumAsteroid(asteroid.transform.position);
                     break;
 
             }
@@ -138,7 +143,7 @@ public class GameManager : MonoBehaviour {
         score += scoreToAdd;
 
         //update score UI
-        uiControl.UpdateScore(score);
+        _uiControl.UpdateScore(score);
 
     }
 
@@ -146,9 +151,9 @@ public class GameManager : MonoBehaviour {
     /// Spawns player at zero position
     /// </summary>
     public void SpawnPlayer() {
-        player.transform.position = new Vector3(0, 0, 0);
-        player.transform.rotation = Quaternion.identity;
-        player.gameObject.SetActive(true);
+        _player.transform.position = new Vector3(0, 0, 0);
+        _player.transform.rotation = Quaternion.identity;
+        _player.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -157,12 +162,12 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void PlayerDeath() {
         //check number of lives
-        if (lives > 0)
+        if (_lives > 0)
         {
             //decrement lives count
-            lives--;
+            _lives--;
             //update lives UI
-            uiControl.UpdateLives(lives);
+            _uiControl.UpdateLives(_lives);
             //spawn player after a delay
             StartCoroutine(DelaySpawn());
         }
@@ -186,8 +191,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void GameOver() {
         _gameOver = true;
-        spawner.StopSpawning();
-        uiControl.ShowHomeScreen();
+        _spawner.StopSpawning();
+        _uiControl.ShowHomeScreen();
         CheckForHighScore();
 
         
@@ -211,7 +216,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("HighScore", score);
         PlayerPrefs.Save();
 
-        uiControl.UpdateHomeUIScores();
+        _uiControl.UpdateHomeUIScores();
     }
 
     /// <summary>
@@ -223,7 +228,7 @@ public class GameManager : MonoBehaviour {
         ResetGameValues();
         ResetUIDisplayText();
         SpawnPlayer();
-        spawner.StartSpawning();
+        _spawner.StartSpawning();
         _gameOver = false;
     }
 
@@ -235,7 +240,7 @@ public class GameManager : MonoBehaviour {
         lastScore = score;
         PlayerPrefs.SetInt("LastScore", lastScore);
         PlayerPrefs.Save();
-        uiControl.UpdateHomeUIScores();
+        _uiControl.UpdateHomeUIScores();
     }
     
     /// <summary>
@@ -245,7 +250,7 @@ public class GameManager : MonoBehaviour {
     {
         //reset values
         score = 0;
-        lives = 3;
+        _lives = 3;
     }
 
     /// <summary>
@@ -253,8 +258,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     private void ResetUIDisplayText() {
         //reset ui display text
-        uiControl.UpdateScore(0);
-        uiControl.UpdateLives(3);
+        _uiControl.UpdateScore(0);
+        _uiControl.UpdateLives(3);
     }
 
     /// <summary>

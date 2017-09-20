@@ -17,7 +17,9 @@ using UnityEngine;
 /// 
 public class ConstantVelocity : MonoBehaviour {
        
-    public float constantSpeed = 10f;
+    [SerializeField]
+    private float _constantSpeed = 10f;
+    public float constantSpeed { get { return _constantSpeed; } set { _constantSpeed = value; } }
 
     private Rigidbody _rb;
 

@@ -15,9 +15,11 @@ using UnityEngine;
 /// </summary>
 public class InputController : MonoBehaviour {
 
-    
-    public MissileLauncher missileControl;
-    public ParticleSystem thrustParticles;
+    [SerializeField]
+    private MissileLauncher _missileControl;
+    [SerializeField]
+    private ParticleSystem _thrustParticles;
+
     public delegate void MoveUp();
     public static event MoveUp OnMoveUp;
     public delegate void ActionPress();
@@ -29,14 +31,23 @@ public class InputController : MonoBehaviour {
     /// Use this for initialization
     /// </summary>
     void Start () {
+
+        Initialize();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void Initialize()
+    {
         player = GetComponent<Player>();
-        missileControl = GetComponent<MissileLauncher>();
-        if (thrustParticles == null) {
+        _missileControl = GetComponent<MissileLauncher>();
+        if (_thrustParticles == null)
+        {
             Debug.Log("Thrust particles not assigned");
         }
-        OnActionPress += missileControl.ShootMissile;
+        OnActionPress += _missileControl.ShootMissile;
         OnMoveUp += Thrust;
-
     }
 
     /// <summary>
@@ -69,7 +80,7 @@ public class InputController : MonoBehaviour {
         else
             {
                 player.Slow();
-                thrustParticles.Stop();
+                _thrustParticles.Stop();
             }
 
         if (Input.GetButtonDown("Shoot")) {
@@ -78,15 +89,21 @@ public class InputController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void Thrust() {
         player.Thrust(Input.GetAxis("Vertical"));
-        if (!thrustParticles.isPlaying)
-            thrustParticles.Play();
+        if (!_thrustParticles.isPlaying)
+            _thrustParticles.Play();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void OnDestroy() {
         //must unsubscribe before destroying
-        OnActionPress -= missileControl.ShootMissile;
+        OnActionPress -= _missileControl.ShootMissile;
         OnMoveUp -= Thrust;
     }
 }

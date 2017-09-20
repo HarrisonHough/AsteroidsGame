@@ -17,14 +17,20 @@ using UnityEngine.UI;
 public class UIControl : MonoBehaviour {
 
     #region Public Variables
-    public Text scoreText;
-    public Text livesText;
+    [SerializeField]
+    private Text _scoreText;
+    [SerializeField]
+    private Text _livesText;
 
-    public Text lastScoreText;
-    public Text highScoreText;
+    [SerializeField]
+    private Text _lastScoreText;
+    [SerializeField]
+    private Text _highScoreText;
 
-    public GameObject gameUIPanel;
-    public GameObject homeScreenPanel;
+    [SerializeField]
+    private GameObject _gameUIPanel;
+    [SerializeField]
+    private GameObject _homeScreenPanel;
     #endregion
 
     /// <summary>
@@ -39,7 +45,7 @@ public class UIControl : MonoBehaviour {
     /// </summary>
     /// <param name="score">Int: Score value to display</param>
     public void UpdateScore(int score) {
-        scoreText.text = "Score: " + score;
+        _scoreText.text = "Score: " + score;
     }
 
     /// <summary>
@@ -48,29 +54,29 @@ public class UIControl : MonoBehaviour {
     /// <param name="lives">Lives: Lives value to display</param>
     public void UpdateLives(int lives)
     {
-        livesText.text = "Lives: " + lives;
+        _livesText.text = "Lives: " + lives;
     }
 
     /// <summary>
     /// Updates Score on HomeUI (menu) panel
     /// </summary>
     public void UpdateHomeUIScores() {
-        lastScoreText.text = "Last Score : " + GameManager.lastScore;
-        highScoreText.text = "Best Score : " + GameManager.highScore;
+        _lastScoreText.text = "Last Score : " + GameManager.lastScore;
+        _highScoreText.text = "Best Score : " + GameManager.highScore;
     }
 
     /// <summary>
     /// Enables Home screen panel
     /// </summary>
     public void ShowHomeScreen() {
-        homeScreenPanel.SetActive(true);
+        _homeScreenPanel.SetActive(true);
     }
 
     /// <summary>
     /// Triggers game start/ restart
     /// </summary>
     public void StartGame() {
-        homeScreenPanel.SetActive(false);
+        _homeScreenPanel.SetActive(false);
         GameManager.instance.StartGame();
     }
 

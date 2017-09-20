@@ -93,6 +93,10 @@ public class WorldWrap : MonoBehaviour
         SetNewPosition(pos);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="position"></param>
     private void SetNewPosition(Vector3 position) {
         transform.position = position;
     }

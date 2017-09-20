@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 3
+    m_MixedBakeMode: 2
     m_BakeBackend: 0
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -146,6 +146,31 @@ Prefab:
     - target: {fileID: 4639211074297436, guid: bb5ccdfed82a81b428cf91ab72c090eb, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114401725636850384, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _explosion
+      value: 
+      objectReference: {fileID: 518055407}
+    - target: {fileID: 114401725636850384, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _shield
+      value: 
+      objectReference: {fileID: 1403742408}
+    - target: {fileID: 114076355764693368, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _missileControl
+      value: 
+      objectReference: {fileID: 2069732209}
+    - target: {fileID: 114076355764693368, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _thrustParticles
+      value: 
+      objectReference: {fileID: 518055410}
+    - target: {fileID: 114401725636850384, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _thrustPower
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb5ccdfed82a81b428cf91ab72c090eb, type: 2}
@@ -805,6 +830,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxYRotation: 35
+--- !u!1 &518055407 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1452132784395470, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1854724}
+--- !u!198 &518055410 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198501940536867562, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1854724}
 --- !u!1 &624280943
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,15 +1111,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25298a655177ec345a913bd5cd02c195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefabs:
+  _asteroidPrefabs:
   - {fileID: 1555197637338698, guid: 83bfa41b2a3acca4a9f0c79da68f4e7b, type: 2}
   - {fileID: 1105431412048196, guid: ab336fa17b54e064aa9c0c75be82f28e, type: 2}
   - {fileID: 1626413772590940, guid: b9cc8fff47dc8204cad2e5fe8ccaa187, type: 2}
-  itemPrefabs: []
-  spawnPoints: []
-  spawnInterval: 3
-  totalAsteroidsSpawned: 0
-  activeAsteroidLimit: 50
+  _itemPrefabs:
+  - {fileID: 1438508739386962, guid: 3202c7c14525a8b4a8334a5766d4abbf, type: 2}
+  _spawnPoints:
+  - {fileID: 689794596}
+  - {fileID: 647419985}
+  - {fileID: 2068532399}
+  - {fileID: 841338470}
+  - {fileID: 678751758}
+  - {fileID: 962370451}
+  - {fileID: 507179963}
+  - {fileID: 1740615307}
+  - {fileID: 94536558}
+  - {fileID: 1003717192}
+  - {fileID: 1175977325}
+  - {fileID: 967535256}
+  _spawnInterval: 3
+  _totalAsteroidsSpawned: 0
+  _activeAsteroidLimit: 50
 --- !u!1 &668086432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1716,7 @@ GameObject:
   - component: {fileID: 1038430789}
   - component: {fileID: 1038430788}
   m_Layer: 5
-  m_Name: 'Best Score Text '
+  m_Name: 'High Score Text '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2291,6 +2339,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1329822561}
+--- !u!1 &1403742408 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1814291434447634, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1854724}
 --- !u!1 &1494042892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,12 +2815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20458502717e4c438f660a7892ec920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 784190111}
-  livesText: {fileID: 1166822636}
-  lastScoreText: {fileID: 668086434}
-  highScoreText: {fileID: 1038430788}
-  gameUIPanel: {fileID: 453822131}
-  homeScreenPanel: {fileID: 1494042892}
+  _scoreText: {fileID: 784190111}
+  _livesText: {fileID: 1166822636}
+  _lastScoreText: {fileID: 668086434}
+  _highScoreText: {fileID: 1038430788}
+  _gameUIPanel: {fileID: 453822131}
+  _homeScreenPanel: {fileID: 1494042892}
 --- !u!1 &2032237344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,12 +2850,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4363338941a42b04b9c88751d77cd2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1995665666526606, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+  _playerPrefab: {fileID: 1995665666526606, guid: bb5ccdfed82a81b428cf91ab72c090eb,
     type: 2}
-  spawner: {fileID: 667099551}
-  uiControl: {fileID: 1992902477}
-  lives: 0
-  player: {fileID: 1854725}
+  _spawner: {fileID: 667099551}
+  _uiControl: {fileID: 1992902477}
+  _lives: 0
+  _player: {fileID: 1854725}
 --- !u!4 &2032237346
 Transform:
   m_ObjectHideFlags: 0
@@ -2968,3 +3021,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxYRotation: 45
+--- !u!114 &2069732209 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114980678966879494, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1854724}
+  m_Script: {fileID: 11500000, guid: d21a42b6cc5f4eb46932ab3e0d23cd12, type: 3}

@@ -15,17 +15,24 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour {
 
     //different asteroids to spawn (Order is important)
-    public GameObject[] asteroidPrefabs;
+    [SerializeField]
+    private GameObject[] _asteroidPrefabs;
 
-    public GameObject[] itemPrefabs;
+    [SerializeField]
+    private GameObject[] _itemPrefabs;
+
     //list of different spawn points
-    public SpawnPoint[] spawnPoints;
+    [SerializeField]
+    private SpawnPoint[] _spawnPoints;
     //frequency of spawning
-    public float spawnInterval = 3f;    
+    [SerializeField]
+    private float _spawnInterval = 3f;    
     //keep track of total asteroids spawned
-    public int totalAsteroidsSpawned = 0;
+    [SerializeField]
+    private int _totalAsteroidsSpawned = 0;
     //limit number of active asteroids (for performance)
-    public int activeAsteroidLimit = 50;
+    [SerializeField]
+    private int _activeAsteroidLimit = 50;
 
     //used to prevent same point spawning multiple times 
     private int lastSpawnPoint = -1;
@@ -42,7 +49,7 @@ public class SpawnController : MonoBehaviour {
     /// </summary>
     void Start () {
         AssignSpawnPoints();
-        if (asteroidPrefabs == null)
+        if (_asteroidPrefabs == null)
             Debug.Log("Asteroid prefab array not assigned");
 
         Instantiate();
@@ -62,10 +69,10 @@ public class SpawnController : MonoBehaviour {
     /// Called at start, used to automatically assign spawn points
     /// </summary>
     void AssignSpawnPoints() {
-        spawnPoints = new SpawnPoint[transform.childCount];
-        for (int i = 0; i < spawnPoints.Length; i++)
+        _spawnPoints = new SpawnPoint[transform.childCount];
+        for (int i = 0; i < _spawnPoints.Length; i++)
         {
-            spawnPoints[i] = transform.GetChild(i).GetComponent<SpawnPoint>();
+            _spawnPoints[i] = transform.GetChild(i).GetComponent<SpawnPoint>();
         }
     }
 
@@ -83,7 +90,7 @@ public class SpawnController : MonoBehaviour {
         {
 
             timer += Time.deltaTime;
-            if (timer > spawnInterval && Asteroid.currentAsteroidCount < activeAsteroidLimit)
+            if (timer > _spawnInterval && Asteroid.currentAsteroidCount < _activeAsteroidLimit)
             {
                 timer = 0;
                 SpawnRandomAsteroid();
@@ -101,7 +108,7 @@ public class SpawnController : MonoBehaviour {
         SpawnPoint sp = RandomSpawnPoint();
         spawnRotation.transform.rotation = sp.transform.rotation;
         spawnRotation.transform.Rotate(0, Random.Range(-sp.maxYRotation, sp.maxYRotation), 0);
-        GameObject asteroid = Instantiate(asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)], sp.transform.position,
+        GameObject asteroid = Instantiate(_asteroidPrefabs[Random.Range(0, _asteroidPrefabs.Length)], sp.transform.position,
             spawnRotation.transform.rotation, asteroidParent.transform);
     }
 
@@ -142,7 +149,7 @@ public class SpawnController : MonoBehaviour {
         for (int i = 0; i < 2; i++)
         {
             rotation = RandomYRotation();
-            GameObject asteroid = Instantiate(asteroidPrefabs[0], position - offset,
+            GameObject asteroid = Instantiate(_asteroidPrefabs[0], position - offset,
                 rotation, asteroidParent.transform);
         }
 
@@ -162,7 +169,7 @@ public class SpawnController : MonoBehaviour {
         for (int i = 0; i < 2; i++)
         {
             rotation = RandomYRotation();
-            GameObject asteroid = Instantiate(asteroidPrefabs[1], position + offset,
+            GameObject asteroid = Instantiate(_asteroidPrefabs[1], position + offset,
                 rotation, asteroidParent.transform);
 
         }
@@ -184,12 +191,12 @@ public class SpawnController : MonoBehaviour {
     /// <returns>SpawnPoint : Used to determine spawn position and rotation of Asteroid</returns>
     public SpawnPoint RandomSpawnPoint() {
 
-        int index = Random.Range(0, spawnPoints.Length);
+        int index = Random.Range(0, _spawnPoints.Length);
         while (index == lastSpawnPoint)
-            index = Random.Range(0, spawnPoints.Length);
+            index = Random.Range(0, _spawnPoints.Length);
 
         lastSpawnPoint = index;
-        return spawnPoints[index];
+        return _spawnPoints[index];
     }
 
 }
