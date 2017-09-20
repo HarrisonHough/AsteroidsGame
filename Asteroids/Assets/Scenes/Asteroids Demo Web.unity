@@ -172,6 +172,11 @@ Prefab:
       propertyPath: _thrustPower
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114401725636850384, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 2}
+      propertyPath: _rotateSpeed
+      value: 3.26
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bb5ccdfed82a81b428cf91ab72c090eb, type: 2}
   m_IsPrefabParent: 0

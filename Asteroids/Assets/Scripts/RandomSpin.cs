@@ -22,12 +22,23 @@ public class RandomSpin : MonoBehaviour {
     private bool _rotate = false;
     // Use this for initialization
     private void Start () {
-        if (_rotateTarget != null)
-        {
-            _rotate = true;
-            StartCoroutine(Spin());
-        }
+        if (_rotateTarget == null)
+            _rotateTarget = transform.GetChild(0).transform;
+
+        StartSpin();
+        
 	}
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void StartSpin()
+    {
+        if (_rotate) return;
+
+        _rotate = true;
+        StartCoroutine(Spin());
+    }
 
     /// <summary>
     /// 

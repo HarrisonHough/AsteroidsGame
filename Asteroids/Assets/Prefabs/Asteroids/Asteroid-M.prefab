@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7133e118dc8c50a45b4a992a5fdf36c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateTarget: {fileID: 4756016141699588}
-  rotationSpeed: 3
+  _rotateTarget: {fileID: 4756016141699588}
+  _rotationSpeed: 3
 --- !u!114 &114796331438157502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a611c94b41445e4f842dd1e764d7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRange: {x: 1, y: 6}
-  pointsForKilling: 25
+  _speedRange: {x: 1, y: 7.5}
+  _pointsForKilling: 0
   m_Type: 1
 --- !u!114 &114996368877737778
 MonoBehaviour:
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a69823a8759cc44ac343e9538e54b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constantSpeed: 2
+  _constantSpeed: 10
 --- !u!135 &135913689056233414
 SphereCollider:
   m_ObjectHideFlags: 1
