@@ -80,8 +80,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-Asteroids/Library/webgl_cache/linkresult_asm_A0F466E4E4E5A97EACF5BE01D360536D/build.asm.js
-Asteroids/Library/webgl_cache/linkresult_asm_A0F466E4E4E5A97EACF5BE01D360536D/build.js
 Asteroids/Builds/
-Asteroids/Library/webgl_cache/
 Asteroids/Library/
