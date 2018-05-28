@@ -34,6 +34,11 @@ public class SpawnController : MonoBehaviour {
     [SerializeField]
     private int _activeAsteroidLimit = 50;
 
+    [SerializeField]
+    private float smallAsteroidSpawnOffset = 0.5f;
+    [SerializeField]
+    private float mediumAsteroidSpawnOffset = 1f;
+
     //used to prevent same point spawning multiple times 
     private int _lastSpawnPoint = -1;
     //flag used to prevent/trigger spawning
@@ -144,12 +149,15 @@ public class SpawnController : MonoBehaviour {
     {
        
         //need offset to ensure both asteriods don't spawn in same spot causing a collision/destruction
-        Vector3 offset = new Vector3(0.225f, 0, 0.225f);
+        Vector3 offset = new Vector3(smallAsteroidSpawnOffset, 0, smallAsteroidSpawnOffset);
 
         Quaternion rotation = RandomYRotation();
         for (int i = 0; i < 2; i++)
         {
-            rotation = RandomYRotation();
+            rotation.x = -rotation.x;
+            rotation.y = -rotation.y;
+            rotation.z = -rotation.z;
+            offset = -offset;
             GameObject asteroid = Instantiate(_asteroidPrefabs[0], position - offset,
                 rotation, _asteroidParent.transform);
         }
@@ -163,13 +171,16 @@ public class SpawnController : MonoBehaviour {
     public void SpawnMediumAsteroid(Vector3 position) {
 
         //need offset to ensure both asteroids don't spawn in same spot causing a collision/destruction
-        Vector3 offset = new Vector3(0.39f, 0, 0.39f);
+        Vector3 offset = new Vector3(mediumAsteroidSpawnOffset, 0, mediumAsteroidSpawnOffset);
 
         Quaternion rotation = RandomYRotation();
         //create 2 asteroids
         for (int i = 0; i < 2; i++)
         {
-            rotation = RandomYRotation();
+            rotation.x = -rotation.x;
+            rotation.y = -rotation.y;
+            rotation.z = -rotation.z;
+            offset = -offset;
             GameObject asteroid = Instantiate(_asteroidPrefabs[1], position + offset,
                 rotation, _asteroidParent.transform);
 

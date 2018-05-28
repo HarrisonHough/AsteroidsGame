@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
     private Player _player;
 
     private SoundController _soundControl;
+    public SoundController SoundControl { get { return _soundControl; } }
     private bool _gameOver = false;
     
 
@@ -108,13 +109,16 @@ public class GameManager : MonoBehaviour {
             {
                 case 0:
                     AddScore(10);
+                    _uiControl.ShowTextAtPosition(""+10,asteroid.transform.position);
                     break;
                 case 1:
                     AddScore(25);
+                    _uiControl.ShowTextAtPosition("" + 25, asteroid.transform.position);
                     _spawner.SpawnSmallAsteroid(asteroid.transform.position);
                     break;
                 case 2:
                     AddScore(50);
+                    _uiControl.ShowTextAtPosition("" + 50, asteroid.transform.position);
                     _spawner.SpawnMediumAsteroid(asteroid.transform.position);
                     break;
 

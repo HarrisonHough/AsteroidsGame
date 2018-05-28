@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// 
+/// </summary>
 public class WorldBox : MonoBehaviour {
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Start()
     {
         SetToScreenSize();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     void SetToScreenSize()
     {
         Vector3 position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 7));

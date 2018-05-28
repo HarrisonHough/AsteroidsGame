@@ -38,13 +38,32 @@ public class Asteroid : Enemy {
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
         currentAsteroidCount--;
-        if (other.tag != "WorldBox" && other.tag != "Untagged") {
-            Hit();
+
+        
+        switch (other.tag)
+        {
+            case "Player":
+                Hit();
+                break;
+            case "Missile":
+                HitByMissile();
+                break;
+            case "Border":
+                BorderHit();
+                break;
+            case "Enemy":
+                Hit();
+                break;
+            default:
+                //Hit();
+                break;
+
         }
-        if (other.tag == "Border") {
-            BorderHit();
-            return;
-        }
+
+
+        //if (other.tag != "WorldBox" && other.tag != "Untagged")
+        //if (other.tag == "Player" || other.tag == "Missile")
+
 
         
     }
@@ -52,12 +71,25 @@ public class Asteroid : Enemy {
     /// <summary>
     /// Hides object and triggers Asteroid Hit function in GameManager
     /// </summary>
-    private void Hit() {
+    private void HitByMissile() {
 
         //Debug.Log("Missile hit an asteroid");
 
         //send asteroid hit to GameManager
         GameManager.instance.AsteroidHit(this);
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Hides object and triggers Asteroid Hit function in GameManager
+    /// </summary>
+    private void Hit()
+    {
+
+        //Debug.Log("Missile hit an asteroid");
+
+        //send asteroid hit to GameManager
+        GameManager.instance.SoundControl.PlayerExplode();
         gameObject.SetActive(false);
     }
 

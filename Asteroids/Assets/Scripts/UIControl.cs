@@ -31,6 +31,14 @@ public class UIControl : MonoBehaviour {
     private GameObject _gameUIPanel;
     [SerializeField]
     private GameObject _homeScreenPanel;
+
+    [SerializeField]
+    private int dynamicTextArrayLength = 10;
+    private int dynamicTextArrayIndex = 0;
+    [SerializeField]
+    private GameObject dynamicTextArrayHolder;
+    private DynamicText[] dynamicTextArray;
+
     #endregion
 
     /// <summary>
@@ -38,13 +46,45 @@ public class UIControl : MonoBehaviour {
     /// </summary>
     private void Start () {
         UpdateHomeUIScores();
+        CreateTextArray();
 	}
+
+    private void CreateTextArray()
+    {
+        dynamicTextArray = new DynamicText[dynamicTextArrayLength];
+        GameObject dynamicTextObject = dynamicTextArrayHolder.transform.GetChild(0).gameObject;
+
+        //assign first dynamic text as it already exists
+        dynamicTextArray[0] = dynamicTextObject.GetComponent<DynamicText>();
+        for (int i = 1; i < dynamicTextArrayLength; i++)
+        {
+            //create new dynamic text by duplicating the existing one and parent to dynamicTextArrayHolder
+            dynamicTextArray[i] = Instantiate(dynamicTextObject, dynamicTextArrayHolder.transform).GetComponent<DynamicText>();
+        }
+
+    }
+
+    public void ShowTextAtPosition(string textToDisplay, Vector3 worldPosition)
+    {
+        dynamicTextArray[dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, worldPosition);
+        dynamicTextArrayIndex++;
+        if (dynamicTextArrayIndex >= dynamicTextArrayLength)
+        {
+            dynamicTextArrayIndex = 0;
+        }
+    }
+
+    public void ShowTextAtPosition(string textToDisplay, Vector2 screenPosition)
+    {
+
+    }
 
     /// <summary>
     /// Updates Score text element
     /// </summary>
     /// <param name="score">Int: Score value to display</param>
     public void UpdateScore(int score) {
+        
         _scoreText.text = "Score: " + score;
     }
 

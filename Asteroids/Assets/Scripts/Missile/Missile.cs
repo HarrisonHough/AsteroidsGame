@@ -16,7 +16,6 @@ using UnityEngine;
 public class Missile : MonoBehaviour {
 
     public float maxDuration = 10f;
-    private bool _Hit = false;
 
     void OnEnable() {
         StartCoroutine(DestroyTimer());
@@ -28,14 +27,14 @@ public class Missile : MonoBehaviour {
     /// <param name="other">Collider : The collider of the object trigger</param>
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Enemy") {
-           _Hit = true;
+            Destroy();
         }
     }
 
 
     IEnumerator DestroyTimer() {
         float time = 0;
-        while (!_Hit && time < maxDuration) {
+        while (time < maxDuration) {
             time += Time.deltaTime;
             yield return null;
         }
@@ -53,7 +52,6 @@ public class Missile : MonoBehaviour {
 
     void Destroy() {
         StopAllCoroutines();
-        _Hit = false;
         gameObject.SetActive(false);
         
     }

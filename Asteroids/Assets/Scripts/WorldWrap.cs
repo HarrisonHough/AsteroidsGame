@@ -17,16 +17,21 @@ using UnityEngine;
 public class WorldWrap : MonoBehaviour
 {
     private Rigidbody _rb;
-    private float _posXBound = 8.5f;
-    private float _posZBound = 4.8f;
-    private float _posXMax = 8.45f;
-    private float _posZMax = 4.75f;
+
+    [SerializeField]
+    private float worldWrapPositionOffset = 0.5f;
+    private float maxPositionX;
+    private float maxPositionZ;
+
+
     /// <summary>
     /// Use this for initialization
     /// </summary>
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        maxPositionX = Mathf.Abs(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 8)).x);
+        maxPositionZ = Mathf.Abs(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 8)).z);
     }
 
     /// <summary>
@@ -47,50 +52,51 @@ public class WorldWrap : MonoBehaviour
     /// <param name="other">Collider: Collider of the object trigger</param>
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exited World");
+        //Debug.Log("Exited World");
+        //Check when leaving world box
         if (other.tag == "WorldBox")
-            CheckPosition();
+        {
+            CheckPositionAndWrap();
+        }
     }
 
     /// <summary>
     /// Jumps / Moves player to opposite side of the screen
     /// causing "world wrap" effect
     /// </summary>
-    void CheckPosition()
+    void CheckPositionAndWrap()
     {
-        //Debug.Log("setting position");
-        Vector3 pos = transform.position;
-        //8.0003 4.503
-        //check X position
-        if (pos.x > _posXBound)
+        //store this objects position
+        Vector3 objectPosition = transform.position;
+
+        //Check X position
+        if (objectPosition.x > maxPositionX)
         {
-            pos.x = -_posXMax;
-        }
-        else if (pos.x < -_posXBound)
-        {
-            pos.x = _posXMax;
             
+            //mirror position on X axis and subtract offset to prevent spawning outside world box
+            objectPosition.x = - Mathf.Abs(maxPositionX - worldWrapPositionOffset);
         }
-        else
+        else if (objectPosition.x < -maxPositionX)
         {
-            pos.x = -pos.x;            
+            //mirror position on X axis and subtract offset to prevent spawning outside world box
+            objectPosition.x = maxPositionX - worldWrapPositionOffset;
         }
 
-        //check z position
-        if (pos.z > _posZBound)
+        //Check Z position
+        if (objectPosition.z > maxPositionZ)
         {
-            pos.z = -_posZMax;
+            //mirror position on Z axis and subtract offset to prevent spawning outside world box
+            objectPosition.z = -Mathf.Abs(maxPositionZ - worldWrapPositionOffset);
+
         }
-        else if (pos.z < -_posZBound)
+        else if (objectPosition.z < -maxPositionZ)
         {
-            pos.z = _posZMax;
-        }
-        else
-        {
-            pos.z = -pos.z;
+            //mirror position on Z axis and subtract offset to prevent spawning outside world box
+            objectPosition.z = maxPositionZ - worldWrapPositionOffset;
         }
 
-        SetNewPosition(pos);
+        //Finally set new position (mirrored as if wrapped around the screen)
+        SetNewPosition(objectPosition);
     }
 
     /// <summary>
