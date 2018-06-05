@@ -135,7 +135,8 @@ public class GameManager : MonoBehaviour {
     /// <param name="asteroid"></param>
     public void AsteroidHitBorder(Asteroid asteroid) {
 
-        Destroy(asteroid.gameObject);
+        //TODO Remove if not needed
+        //Destroy(asteroid.gameObject);
     }
 
     /// <summary>
@@ -165,6 +166,8 @@ public class GameManager : MonoBehaviour {
     /// and player spawning
     /// </summary>
     public void PlayerDeath() {
+
+        Debug.Log("Player Died!!!!!!");
         //check number of lives
         if (_lives > 0)
         {

@@ -308,6 +308,8 @@
     <Compile Include="Assets\Scripts\Missile\MissileLauncher.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroy.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Pooling\Pool.cs" />
+    <Compile Include="Assets\Scripts\Pooling\PoolMember.cs" />
     <Compile Include="Assets\Scripts\RandomSpin.cs" />
     <Compile Include="Assets\Scripts\SoundController.cs" />
     <Compile Include="Assets\Scripts\SpawnController.cs" />

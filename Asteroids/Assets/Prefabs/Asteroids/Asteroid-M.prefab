@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114393818905832852}
   - component: {fileID: 114530228444571952}
   - component: {fileID: 114782271200293334}
+  - component: {fileID: 114144954203442274}
   m_Layer: 0
   m_Name: Asteroid-M
   m_TagString: Enemy
@@ -87,6 +88,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -102,6 +104,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -139,6 +142,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114144954203442274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1105431412048196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba08861bf00c5d459e40d9a0596f49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114393818905832852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b322d79770f9a4dbe77772bf355a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldWrapPositionOffset: 0.5
 --- !u!114 &114530228444571952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a611c94b41445e4f842dd1e764d7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPoolSize: 20
   _speedRange: {x: 1, y: 7.5}
   _pointsForKilling: 0
   m_Type: 1

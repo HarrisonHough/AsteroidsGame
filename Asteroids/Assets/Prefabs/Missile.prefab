@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114060132836585484}
   - component: {fileID: 114924486318480728}
   - component: {fileID: 114331301718588384}
+  - component: {fileID: 114501407913282122}
   m_Layer: 0
   m_Name: Missile
   m_TagString: Missile
@@ -85,6 +86,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -100,6 +102,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -153,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a69823a8759cc44ac343e9538e54b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constantSpeed: 7
+  _constantSpeed: 10
 --- !u!114 &114331301718588384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +172,17 @@ MonoBehaviour:
     type: 2}
   destroyOnCollision: 0
   tagName: Enemy
+--- !u!114 &114501407913282122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1838012513569038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba08861bf00c5d459e40d9a0596f49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114898875500000082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ee42062b5594c4cb97f630534f857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPoolSize: 100
   maxDuration: 1.5
 --- !u!114 &114924486318480728
 MonoBehaviour:
@@ -192,3 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b322d79770f9a4dbe77772bf355a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldWrapPositionOffset: 0.5

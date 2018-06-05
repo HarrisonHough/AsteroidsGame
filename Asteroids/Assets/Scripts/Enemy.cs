@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour {
         _velocity = GetComponent<ConstantVelocity>();
         SetInitialVelocity();
 
+        
     }
 
     /// <summary>
@@ -36,4 +37,6 @@ public class Enemy : MonoBehaviour {
         float speed = Random.Range(_speedRange.x, _speedRange.y);
         _velocity.constantSpeed = speed;
     }
+
+    
 }

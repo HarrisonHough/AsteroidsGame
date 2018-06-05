@@ -77,7 +77,7 @@ public class Asteroid : Enemy {
 
         //send asteroid hit to GameManager
         GameManager.instance.AsteroidHit(this);
-        gameObject.SetActive(false);
+        Destroy();
     }
 
     /// <summary>
@@ -90,7 +90,8 @@ public class Asteroid : Enemy {
 
         //send asteroid hit to GameManager
         GameManager.instance.SoundControl.PlayerExplode();
-        gameObject.SetActive(false);
+        Destroy();
+
     }
 
     /// <summary>
@@ -101,8 +102,18 @@ public class Asteroid : Enemy {
         //Debug.Log("Asteroid hit the border");
 
         //send asteroid hit to GameManager
-        GameManager.instance.AsteroidHitBorder(this);
+        //GameManager.instance.AsteroidHitBorder(this);
+        Destroy();
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    private void Destroy()
+    {
         gameObject.SetActive(false);
     }
-    
+
 }

@@ -16,17 +16,11 @@ using UnityEngine;
 public class MissileLauncher : MonoBehaviour {
 
     //reference to the prefab to spawn
-    public GameObject missilePrefab;
+    [SerializeField]
+    private Pool missilePool;
     //reference to the spawn point position
-    public GameObject missileSpawnPoint;
-
-
-    public int poolSize = 20;
-
-    private GameObject[] _missiles;
-    //used to keep scene organized by putting missiles
-    //under one parent object
-    private GameObject _missileParent;
+    [SerializeField]
+    private GameObject missileSpawnPoint;
 
     private SoundController soundControl;
     
@@ -38,11 +32,11 @@ public class MissileLauncher : MonoBehaviour {
         //check for null references
         if (missileSpawnPoint == null)
             Debug.Log("Must Assign Missile Spawn Point");
-        else if (missilePrefab == null)
-            Debug.Log("Must Assign Missile Prefab");
+ 
 
         soundControl = FindObjectOfType<SoundController>();
-        CreateMissilePool();
+
+        //CreateMissilePool();
 
     }
 
@@ -52,16 +46,16 @@ public class MissileLauncher : MonoBehaviour {
     private void CreateMissilePool()
     {
         //create parent object
-        _missileParent = new GameObject("_missiles");
+        //_missileParent = new GameObject("_missiles");
         
 
-        _missiles = new GameObject[poolSize];
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject obj = Instantiate(missilePrefab, missileSpawnPoint.transform.position, missileSpawnPoint.transform.rotation, _missileParent.transform);
-            obj.SetActive(false);
-            _missiles[i] = obj;
-        }
+        //_missiles = new GameObject[poolSize];
+        //for (int i = 0; i < 5; i++)
+        //{
+            //GameObject obj = Instantiate(missilePoolPrefab, missileSpawnPoint.transform.position, missileSpawnPoint.transform.rotation, _missileParent.transform);
+           // obj.SetActive(false);
+           // _missiles[i] = obj;
+       // }
     }
 
     /// <summary>
@@ -69,7 +63,7 @@ public class MissileLauncher : MonoBehaviour {
     /// </summary>
     public void ShootMissile() {
         //GameObject missile = Instantiate(missilePrefab, missileSpawnPoint.transform.position, missileSpawnPoint.transform.rotation, _missileParent.transform);
-        for (int i = 0; i < _missiles.Length; i++) {
+        /*for (int i = 0; i < _missiles.Length; i++) {
             if (!_missiles[i].activeSelf)
             {
                 _missiles[i].transform.position = missileSpawnPoint.transform.position;
@@ -77,11 +71,17 @@ public class MissileLauncher : MonoBehaviour {
                 _missiles[i].SetActive(true);
                 break;
             }
-        }
+        }*/
+
+        GameObject pooledMissile =  missilePool.GetObject();
+        pooledMissile.transform.position = missileSpawnPoint.transform.position;
+        pooledMissile.transform.rotation =  missileSpawnPoint.transform.rotation;
+        pooledMissile.SetActive(true);
+
         soundControl.PlayerShoot();
     }
 
     void OnDestroy() {
-        Destroy(_missileParent);
+       // Destroy(_missileParent);
     }
 }

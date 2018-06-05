@@ -45,11 +45,6 @@ public class Missile : MonoBehaviour {
 
     }
 
-    /*void OnDestroy() {
-        _Hit = false;
-        StopAllCoroutines();
-    }*/
-
     void Destroy() {
         StopAllCoroutines();
         gameObject.SetActive(false);
