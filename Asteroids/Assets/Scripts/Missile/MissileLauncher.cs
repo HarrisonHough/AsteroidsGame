@@ -35,49 +35,19 @@ public class MissileLauncher : MonoBehaviour {
  
 
         soundControl = FindObjectOfType<SoundController>();
-
-        //CreateMissilePool();
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    private void CreateMissilePool()
-    {
-        //create parent object
-        //_missileParent = new GameObject("_missiles");
-        
-
-        //_missiles = new GameObject[poolSize];
-        //for (int i = 0; i < 5; i++)
-        //{
-            //GameObject obj = Instantiate(missilePoolPrefab, missileSpawnPoint.transform.position, missileSpawnPoint.transform.rotation, _missileParent.transform);
-           // obj.SetActive(false);
-           // _missiles[i] = obj;
-       // }
     }
 
     /// <summary>
     /// Creates missile at SpawnPoint
     /// </summary>
     public void ShootMissile() {
-        //GameObject missile = Instantiate(missilePrefab, missileSpawnPoint.transform.position, missileSpawnPoint.transform.rotation, _missileParent.transform);
-        /*for (int i = 0; i < _missiles.Length; i++) {
-            if (!_missiles[i].activeSelf)
-            {
-                _missiles[i].transform.position = missileSpawnPoint.transform.position;
-                _missiles[i].transform.rotation = missileSpawnPoint.transform.rotation;
-                _missiles[i].SetActive(true);
-                break;
-            }
-        }*/
-
+     
         GameObject pooledMissile =  missilePool.GetObject();
         pooledMissile.transform.position = missileSpawnPoint.transform.position;
         pooledMissile.transform.rotation =  missileSpawnPoint.transform.rotation;
         pooledMissile.SetActive(true);
 
+        
         soundControl.PlayerShoot();
     }
 

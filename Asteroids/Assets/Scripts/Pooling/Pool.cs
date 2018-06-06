@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* AUTHOR: Harrison Hough   
+* COPYRIGHT: Harrison Hough 2017
+* VERSION: 1.0
+* SCRIPT: Pool Class
+*/
+
+/// <summary>
+/// 
+/// </summary>
 public class Pool : MonoBehaviour {
     [SerializeField]
     private GameObject prefabToPool;
@@ -11,13 +21,19 @@ public class Pool : MonoBehaviour {
     private Queue<GameObject> objectsQueue = new Queue<GameObject>();
     private List<GameObject> objectPool = new List<GameObject>();
 
-    // Use this for initialization
+    /// <summary>
+    /// Use this for initialization
+    /// </summary>
     void Start()
     {
         GrowPool();
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public GameObject GetObject()
     {
         if (objectsQueue.Count == 0)
@@ -30,7 +46,9 @@ public class Pool : MonoBehaviour {
         return pooledObject;
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     private void GrowPool()
     {
         int lastPoolSize = objectPool.Count;
@@ -52,6 +70,10 @@ public class Pool : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pooledObject"></param>
     private void AddObjectToAvailable(GameObject pooledObject)
     {
         objectsQueue.Enqueue(pooledObject);
