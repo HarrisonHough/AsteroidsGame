@@ -14,18 +14,18 @@ public enum ItemType { Shield, Bomb, Life };
 public class Item : MonoBehaviour {
 
     
-    public ItemType type;
-    ConstantVelocity velocity;
-    public Vector2 speedRange;
+    public ItemType Type;
+    private ConstantVelocity _velocity;
+    public Vector2 SpeedRange;
 
     /// <summary>
     /// Used for initialization
     /// </summary>
     void Start()
     {
-        velocity = GetComponent<ConstantVelocity>();
-        float speed = Random.Range(speedRange.x, speedRange.y);
-        velocity.constantSpeed = speed;
+        _velocity = GetComponent<ConstantVelocity>();
+        float speed = Random.Range(SpeedRange.x, SpeedRange.y);
+        _velocity.ConstantSpeed = speed;
 
     }
 

@@ -17,9 +17,9 @@ public class Asteroid : Enemy {
 
 
     public enum Type {small, medium, large }
-    public Type m_Type;
-    public static int currentAsteroidCount;
-    public static int totalAsteroidCount;
+    public Type AsteroidType;
+    public static int CurrentAsteroidCount;
+    public static int TotalAsteroidCount;
 
     /// <summary>
     /// Run on game start
@@ -27,8 +27,8 @@ public class Asteroid : Enemy {
     protected override void Start()
     {
         base.Start();
-        currentAsteroidCount++;
-        totalAsteroidCount++;
+        CurrentAsteroidCount++;
+        TotalAsteroidCount++;
 
     }
 
@@ -37,7 +37,7 @@ public class Asteroid : Enemy {
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        currentAsteroidCount--;
+        CurrentAsteroidCount--;
 
         
         switch (other.tag)
@@ -76,7 +76,7 @@ public class Asteroid : Enemy {
         //Debug.Log("Missile hit an asteroid");
 
         //send asteroid hit to GameManager
-        GameManager.instance.AsteroidHit(this);
+        GameManager.Instance.AsteroidHit(this);
         Destroy();
     }
 
@@ -89,7 +89,7 @@ public class Asteroid : Enemy {
         //Debug.Log("Missile hit an asteroid");
 
         //send asteroid hit to GameManager
-        GameManager.instance.SoundControl.PlayerExplode();
+        GameManager.Instance.SoundControl.PlayerExplode();
         Destroy();
 
     }

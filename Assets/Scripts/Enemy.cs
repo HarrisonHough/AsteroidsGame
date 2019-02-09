@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour {
     /// </summary>
     private void SetInitialVelocity() {
         float speed = Random.Range(_speedRange.x, _speedRange.y);
-        _velocity.constantSpeed = speed;
+        _velocity.ConstantSpeed = speed;
     }
 
     

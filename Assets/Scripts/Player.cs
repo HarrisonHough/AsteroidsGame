@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
     /// 
     /// </summary>
     void CheckItem() {
-        switch (_item.type) {
+        switch (_item.Type) {
             case ItemType.Shield:
                 TurnOnShield();
                 break;
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour {
     /// </summary>
     public void Death() {
 
-        GameManager.instance.PlayerDeath();
+        GameManager.Instance.PlayerDeath();
         gameObject.SetActive(false);
     }
 	

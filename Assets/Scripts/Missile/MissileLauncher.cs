@@ -17,12 +17,12 @@ public class MissileLauncher : MonoBehaviour {
 
     //reference to the prefab to spawn
     [SerializeField]
-    private Pool missilePool;
+    private Pool _missilePool;
     //reference to the spawn point position
     [SerializeField]
-    private GameObject missileSpawnPoint;
+    private GameObject _missileSpawnPoint;
 
-    private SoundController soundControl;
+    private SoundController _soundControl;
     
     /// <summary>
     /// Use this for initialization
@@ -30,11 +30,11 @@ public class MissileLauncher : MonoBehaviour {
     void Start () {
 
         //check for null references
-        if (missileSpawnPoint == null)
+        if (_missileSpawnPoint == null)
             Debug.Log("Must Assign Missile Spawn Point");
  
 
-        soundControl = FindObjectOfType<SoundController>();
+        _soundControl = FindObjectOfType<SoundController>();
     }
 
     /// <summary>
@@ -42,13 +42,13 @@ public class MissileLauncher : MonoBehaviour {
     /// </summary>
     public void ShootMissile() {
      
-        GameObject pooledMissile =  missilePool.GetObject();
-        pooledMissile.transform.position = missileSpawnPoint.transform.position;
-        pooledMissile.transform.rotation =  missileSpawnPoint.transform.rotation;
+        GameObject pooledMissile =  _missilePool.GetObject();
+        pooledMissile.transform.position = _missileSpawnPoint.transform.position;
+        pooledMissile.transform.rotation =  _missileSpawnPoint.transform.rotation;
         pooledMissile.SetActive(true);
 
         
-        soundControl.PlayerShoot();
+        _soundControl.PlayerShoot();
     }
 
     void OnDestroy() {

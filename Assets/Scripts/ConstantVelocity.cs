@@ -19,16 +19,16 @@ public class ConstantVelocity : MonoBehaviour {
        
     [SerializeField]
     private float _constantSpeed = 10f;
-    public float constantSpeed { get { return _constantSpeed; } set { _constantSpeed = value; } }
+    public float ConstantSpeed { get { return _constantSpeed; } set { _constantSpeed = value; } }
 
-    private Rigidbody _rb;
+    private Rigidbody _rigidbody;
 
 
     /// <summary>
     /// Use this for initialization
     /// </summary>
     void Start () {
-        _rb = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	/// <summary>
@@ -36,6 +36,6 @@ public class ConstantVelocity : MonoBehaviour {
     /// </summary>
 	void FixedUpdate () {
         //applied within FixedUpdate for accurate physics
-        _rb.velocity = transform.forward * constantSpeed;
+        _rigidbody.velocity = transform.forward * ConstantSpeed;
 	}
 }

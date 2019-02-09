@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour {
 
-    public AudioClip[] audio;
+    public AudioClip[] Audio;
     private AudioSource _source;
     /*
         Audio array order
@@ -35,21 +35,21 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void Collision() {
         int i = Random.Range(1,2);
-       _source.PlayOneShot(audio[i]);
+       _source.PlayOneShot(Audio[i]);
     }
 
     /// <summary>
     /// Play button press sound
     /// </summary>
     public void ButtonPress() {
-       _source.PlayOneShot(audio[0]);
+       _source.PlayOneShot(Audio[0]);
     }
 
     /// <summary>
     /// Play player shoot sound
     /// </summary>
     public void PlayerShoot() {
-       _source.PlayOneShot(audio[5]);
+       _source.PlayOneShot(Audio[5]);
     }
 
     /// <summary>
@@ -57,6 +57,6 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void PlayerExplode() {
         int i = Random.Range(3,4);
-       _source.PlayOneShot(audio[i]);
+       _source.PlayOneShot(Audio[i]);
     }
 }

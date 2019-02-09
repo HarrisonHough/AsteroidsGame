@@ -33,11 +33,11 @@ public class UIControl : MonoBehaviour {
     private GameObject _homeScreenPanel;
 
     [SerializeField]
-    private int dynamicTextArrayLength = 10;
-    private int dynamicTextArrayIndex = 0;
+    private int _dynamicTextArrayLength = 10;
+    private int _dynamicTextArrayIndex = 0;
     [SerializeField]
-    private GameObject dynamicTextArrayHolder;
-    private DynamicText[] dynamicTextArray;
+    private GameObject _dynamicTextArrayHolder;
+    private DynamicText[] _dynamicTextArray;
 
     #endregion
 
@@ -51,26 +51,26 @@ public class UIControl : MonoBehaviour {
 
     private void CreateTextArray()
     {
-        dynamicTextArray = new DynamicText[dynamicTextArrayLength];
-        GameObject dynamicTextObject = dynamicTextArrayHolder.transform.GetChild(0).gameObject;
+        _dynamicTextArray = new DynamicText[_dynamicTextArrayLength];
+        GameObject dynamicTextObject = _dynamicTextArrayHolder.transform.GetChild(0).gameObject;
 
         //assign first dynamic text as it already exists
-        dynamicTextArray[0] = dynamicTextObject.GetComponent<DynamicText>();
-        for (int i = 1; i < dynamicTextArrayLength; i++)
+        _dynamicTextArray[0] = dynamicTextObject.GetComponent<DynamicText>();
+        for (int i = 1; i < _dynamicTextArrayLength; i++)
         {
             //create new dynamic text by duplicating the existing one and parent to dynamicTextArrayHolder
-            dynamicTextArray[i] = Instantiate(dynamicTextObject, dynamicTextArrayHolder.transform).GetComponent<DynamicText>();
+            _dynamicTextArray[i] = Instantiate(dynamicTextObject, _dynamicTextArrayHolder.transform).GetComponent<DynamicText>();
         }
 
     }
 
     public void ShowTextAtPosition(string textToDisplay, Vector3 worldPosition)
     {
-        dynamicTextArray[dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, worldPosition);
-        dynamicTextArrayIndex++;
-        if (dynamicTextArrayIndex >= dynamicTextArrayLength)
+        _dynamicTextArray[_dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, worldPosition);
+        _dynamicTextArrayIndex++;
+        if (_dynamicTextArrayIndex >= _dynamicTextArrayLength)
         {
-            dynamicTextArrayIndex = 0;
+            _dynamicTextArrayIndex = 0;
         }
     }
 
@@ -101,8 +101,8 @@ public class UIControl : MonoBehaviour {
     /// Updates Score on HomeUI (menu) panel
     /// </summary>
     public void UpdateHomeUIScores() {
-        _lastScoreText.text = "Last Score : " + GameManager.lastScore;
-        _highScoreText.text = "Best Score : " + GameManager.highScore;
+        _lastScoreText.text = "Last Score : " + GameManager.LastScore;
+        _highScoreText.text = "Best Score : " + GameManager.HighScore;
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class UIControl : MonoBehaviour {
     /// </summary>
     public void StartGame() {
         _homeScreenPanel.SetActive(false);
-        GameManager.instance.StartGame();
+        GameManager.Instance.StartGame();
     }
 
     /// <summary>

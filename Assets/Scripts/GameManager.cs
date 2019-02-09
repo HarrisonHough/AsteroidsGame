@@ -14,10 +14,10 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour {
 
-    public static GameManager instance = null;
-    public static int score;
-    public static int lastScore;
-    public static int highScore;
+    public static GameManager Instance = null;
+    public static int Score;
+    public static int LastScore;
+    public static int HighScore;
 
     [SerializeField]
     private GameObject _playerPrefab;
@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour {
     private void EnforceSingleton() {
         //Enforces singleton so there is only one instance, multiples will self delete.
         //Game Manager kept alive throughout scene changes.
-        if (instance == null)
-            instance = this;
-        else if (instance != null)
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.Save();
         }
         else
-            lastScore = PlayerPrefs.GetInt("LastScore");
+            LastScore = PlayerPrefs.GetInt("LastScore");
 
         if (!PlayerPrefs.HasKey("HighScore"))
         {
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour {
             PlayerPrefs.Save();
         }
         else
-            highScore = PlayerPrefs.GetInt("HighScore");
+            HighScore = PlayerPrefs.GetInt("HighScore");
 
         if (_player == null)
             _player = FindObjectOfType<Player>();
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
     public void AsteroidHit(Asteroid asteroid) {
         if (!_gameOver)
         {
-            int type = (int)asteroid.m_Type;
+            int type = (int)asteroid.AsteroidType;
             switch (type)
             {
                 case 0:
@@ -145,10 +145,10 @@ public class GameManager : MonoBehaviour {
     /// <param name="scoreToAdd"></param>
     private void AddScore(int scoreToAdd) {
         //add to score
-        score += scoreToAdd;
+        Score += scoreToAdd;
 
         //update score UI
-        _uiControl.UpdateScore(score);
+        _uiControl.UpdateScore(Score);
 
     }
 
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour {
     /// 
     /// </summary>
     private void CheckForHighScore() {
-        if (score > highScore)
+        if (Score > HighScore)
         {
             SetHighScore();
         }
@@ -219,8 +219,8 @@ public class GameManager : MonoBehaviour {
     /// 
     /// </summary>
     private void SetHighScore() {
-        highScore = score;
-        PlayerPrefs.SetInt("HighScore", score);
+        HighScore = Score;
+        PlayerPrefs.SetInt("HighScore", Score);
         PlayerPrefs.Save();
 
         _uiControl.UpdateHomeUIScores();
@@ -244,8 +244,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     private void SetLastScore()
     {
-        lastScore = score;
-        PlayerPrefs.SetInt("LastScore", lastScore);
+        LastScore = Score;
+        PlayerPrefs.SetInt("LastScore", LastScore);
         PlayerPrefs.Save();
         _uiControl.UpdateHomeUIScores();
     }
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour {
     private void ResetGameValues()
     {
         //reset values
-        score = 0;
+        Score = 0;
         _lives = 3;
     }
 
@@ -274,10 +274,10 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void LoadScores() {
         if (PlayerPrefs.HasKey("LastScore")) {
-            lastScore = PlayerPrefs.GetInt("LastScore");
+            LastScore = PlayerPrefs.GetInt("LastScore");
         }
         if (PlayerPrefs.HasKey("HighScore")) {
-            highScore = PlayerPrefs.GetInt("HighScore");
+            HighScore = PlayerPrefs.GetInt("HighScore");
         }
     }
 }

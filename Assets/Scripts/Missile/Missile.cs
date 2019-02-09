@@ -15,7 +15,7 @@ using UnityEngine;
 /// </summary>
 public class Missile : MonoBehaviour {
 
-    public float maxDuration = 10f;
+    public float MaxDuration = 10f;
 
     void OnEnable() {
         StartCoroutine(DestroyTimer());
@@ -34,7 +34,7 @@ public class Missile : MonoBehaviour {
 
     IEnumerator DestroyTimer() {
         float time = 0;
-        while (time < maxDuration) {
+        while (time < MaxDuration) {
             time += Time.deltaTime;
             yield return null;
         }

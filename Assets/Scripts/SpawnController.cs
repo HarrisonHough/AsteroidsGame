@@ -101,7 +101,7 @@ public class SpawnController : MonoBehaviour {
         {
             Debug.Log("Spawn 1 asteroid");
             timer += Time.deltaTime;
-            if (timer > _spawnInterval && Asteroid.currentAsteroidCount < _activeAsteroidLimit)
+            if (timer > _spawnInterval && Asteroid.CurrentAsteroidCount < _activeAsteroidLimit)
             {
                 timer = 0;
                 SpawnRandomAsteroid();
@@ -118,7 +118,7 @@ public class SpawnController : MonoBehaviour {
     {
         SpawnPoint sp = RandomSpawnPoint();
         _spawnRotation.transform.rotation = sp.transform.rotation;
-        _spawnRotation.transform.Rotate(0, Random.Range(-sp.maxYRotation, sp.maxYRotation), 0);
+        _spawnRotation.transform.Rotate(0, Random.Range(-sp.MaxYRotation, sp.MaxYRotation), 0);
 
         
         GameObject pooledObject = _largeAsteroidPool.GetObject();

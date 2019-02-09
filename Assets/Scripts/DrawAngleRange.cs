@@ -18,7 +18,7 @@ using UnityEngine;
 public class DrawAngleRange : MonoBehaviour {
 
     
-    private SpawnPoint _sp;
+    private SpawnPoint _spawnPoint;
     private GameObject _left;
     private GameObject _right;
 
@@ -27,20 +27,20 @@ public class DrawAngleRange : MonoBehaviour {
     /// </summary>
 	private void Start () {
         //get reference
-        _sp = GetComponent<SpawnPoint>();
+        _spawnPoint = GetComponent<SpawnPoint>();
 
         //create transform for Left max angle
         _left = new GameObject("Left");
         _left.transform.position = transform.position;
         _left.transform.rotation = transform.rotation;
-        _left.transform.Rotate(0, _sp.maxYRotation, 0);
+        _left.transform.Rotate(0, _spawnPoint.MaxYRotation, 0);
         _left.transform.parent = transform;
 
         //create transform for right max angle
         _right = new GameObject("Right");
         _right.transform.position = transform.position;
         _right.transform.rotation = transform.rotation;
-        _right.transform.Rotate(0, -_sp.maxYRotation, 0);
+        _right.transform.Rotate(0, -_spawnPoint.MaxYRotation, 0);
         _right.transform.parent = transform;
 	}
 
