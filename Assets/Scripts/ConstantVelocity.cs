@@ -18,17 +18,17 @@ using UnityEngine;
 public class ConstantVelocity : MonoBehaviour {
        
     [SerializeField]
-    private float _constantSpeed = 10f;
-    public float ConstantSpeed { get { return _constantSpeed; } set { _constantSpeed = value; } }
+    private float constantSpeed = 10f;
+    public float ConstantSpeed { get { return constantSpeed; } set { constantSpeed = value; } }
 
-    private Rigidbody _rigidbody;
+    private Rigidbody rigidbody;
 
 
     /// <summary>
     /// Use this for initialization
     /// </summary>
     void Start () {
-        _rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
 	}
 	
 	/// <summary>
@@ -36,6 +36,6 @@ public class ConstantVelocity : MonoBehaviour {
     /// </summary>
 	void FixedUpdate () {
         //applied within FixedUpdate for accurate physics
-        _rigidbody.velocity = transform.forward * ConstantSpeed;
+        rigidbody.velocity = transform.forward * ConstantSpeed;
 	}
 }

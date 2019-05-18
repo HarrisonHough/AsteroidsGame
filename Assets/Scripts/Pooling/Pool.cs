@@ -14,12 +14,12 @@ using UnityEngine;
 /// </summary>
 public class Pool : MonoBehaviour {
     [SerializeField]
-    private GameObject _prefabToPool;
+    private GameObject prefabToPool;
     [SerializeField]
-    private int _poolSize = 50;
+    private int poolSize = 50;
 
-    private Queue<GameObject> _objectsQueue = new Queue<GameObject>();
-    private List<GameObject> _objectPool = new List<GameObject>();
+    private Queue<GameObject> objectsQueue = new Queue<GameObject>();
+    private List<GameObject> objectPool = new List<GameObject>();
 
     /// <summary>
     /// Use this for initialization
@@ -36,12 +36,12 @@ public class Pool : MonoBehaviour {
     /// <returns></returns>
     public GameObject GetObject()
     {
-        if (_objectsQueue.Count == 0)
+        if (objectsQueue.Count == 0)
         {
             GrowPool();
         }
 
-        var pooledObject = _objectsQueue.Dequeue();
+        var pooledObject = objectsQueue.Dequeue();
 
         return pooledObject;
     }
@@ -51,10 +51,10 @@ public class Pool : MonoBehaviour {
     /// </summary>
     private void GrowPool()
     {
-        int lastPoolSize = _objectPool.Count;
-        for (int i = 0; i < _poolSize; i++)
+        int lastPoolSize = objectPool.Count;
+        for (int i = 0; i < poolSize; i++)
         {
-            var pooledObject = Instantiate(_prefabToPool);
+            var pooledObject = Instantiate(prefabToPool);
             pooledObject.name += " " + (i + lastPoolSize );
             pooledObject.transform.parent = transform;
             pooledObject.AddComponent<PoolMember>();
@@ -64,7 +64,7 @@ public class Pool : MonoBehaviour {
 
 
             //add to pool
-            _objectPool.Add(pooledObject);
+            objectPool.Add(pooledObject);
 
             pooledObject.SetActive(false);
         }
@@ -76,6 +76,6 @@ public class Pool : MonoBehaviour {
     /// <param name="pooledObject"></param>
     private void AddObjectToAvailable(GameObject pooledObject)
     {
-        _objectsQueue.Enqueue(pooledObject);
+        objectsQueue.Enqueue(pooledObject);
     }
 }

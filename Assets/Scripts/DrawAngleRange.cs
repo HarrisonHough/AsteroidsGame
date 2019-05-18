@@ -18,30 +18,30 @@ using UnityEngine;
 public class DrawAngleRange : MonoBehaviour {
 
     
-    private SpawnPoint _spawnPoint;
-    private GameObject _left;
-    private GameObject _right;
+    private SpawnPoint spawnPoint;
+    private GameObject left;
+    private GameObject right;
 
     /// <summary>
     /// Used for Initialization
     /// </summary>
 	private void Start () {
         //get reference
-        _spawnPoint = GetComponent<SpawnPoint>();
+        spawnPoint = GetComponent<SpawnPoint>();
 
         //create transform for Left max angle
-        _left = new GameObject("Left");
-        _left.transform.position = transform.position;
-        _left.transform.rotation = transform.rotation;
-        _left.transform.Rotate(0, _spawnPoint.MaxYRotation, 0);
-        _left.transform.parent = transform;
+        left = new GameObject("Left");
+        left.transform.position = transform.position;
+        left.transform.rotation = transform.rotation;
+        left.transform.Rotate(0, spawnPoint.MaxYRotation, 0);
+        left.transform.parent = transform;
 
         //create transform for right max angle
-        _right = new GameObject("Right");
-        _right.transform.position = transform.position;
-        _right.transform.rotation = transform.rotation;
-        _right.transform.Rotate(0, -_spawnPoint.MaxYRotation, 0);
-        _right.transform.parent = transform;
+        right = new GameObject("Right");
+        right.transform.position = transform.position;
+        right.transform.rotation = transform.rotation;
+        right.transform.Rotate(0, -spawnPoint.MaxYRotation, 0);
+        right.transform.parent = transform;
 	}
 
 
@@ -50,12 +50,12 @@ public class DrawAngleRange : MonoBehaviour {
     /// </summary>
     private void Update () {
 
-        //draw max _left ray
-        Vector3 forward = _left.transform.forward * 10;
+        //draw max left ray
+        Vector3 forward = left.transform.forward * 10;
         Debug.DrawRay(transform.position, forward, Color.green, 2, false);
 
-        //draw max _right ray
-        forward = _right.transform.forward * 10;
+        //draw max right ray
+        forward = right.transform.forward * 10;
         Debug.DrawRay(transform.position, forward, Color.green, 2, false);
     }
 }

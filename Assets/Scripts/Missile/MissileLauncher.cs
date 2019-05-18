@@ -11,18 +11,18 @@ using UnityEngine;
 
 /// <summary>
 /// Missile Launcher class handles the shooting (spawning) of 
-/// _missiles
+/// missiles
 /// </summary>
 public class MissileLauncher : MonoBehaviour {
 
     //reference to the prefab to spawn
     [SerializeField]
-    private Pool _missilePool;
+    private Pool missilePool;
     //reference to the spawn point position
     [SerializeField]
-    private GameObject _missileSpawnPoint;
+    private GameObject missileSpawnPoint;
 
-    private SoundController _soundControl;
+    private SoundController soundControl;
     
     /// <summary>
     /// Use this for initialization
@@ -30,11 +30,11 @@ public class MissileLauncher : MonoBehaviour {
     void Start () {
 
         //check for null references
-        if (_missileSpawnPoint == null)
+        if (missileSpawnPoint == null)
             Debug.Log("Must Assign Missile Spawn Point");
  
 
-        _soundControl = FindObjectOfType<SoundController>();
+        soundControl = FindObjectOfType<SoundController>();
     }
 
     /// <summary>
@@ -42,16 +42,16 @@ public class MissileLauncher : MonoBehaviour {
     /// </summary>
     public void ShootMissile() {
      
-        GameObject pooledMissile =  _missilePool.GetObject();
-        pooledMissile.transform.position = _missileSpawnPoint.transform.position;
-        pooledMissile.transform.rotation =  _missileSpawnPoint.transform.rotation;
+        GameObject pooledMissile =  missilePool.GetObject();
+        pooledMissile.transform.position = missileSpawnPoint.transform.position;
+        pooledMissile.transform.rotation =  missileSpawnPoint.transform.rotation;
         pooledMissile.SetActive(true);
 
         
-        _soundControl.PlayerShoot();
+        soundControl.PlayerShoot();
     }
 
     void OnDestroy() {
-       // Destroy(_missileParent);
+       // Destroy(missileParent);
     }
 }

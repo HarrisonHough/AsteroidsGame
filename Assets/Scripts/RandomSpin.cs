@@ -15,15 +15,15 @@ using UnityEngine;
 public class RandomSpin : MonoBehaviour {
 
     [SerializeField]
-    private Transform _rotateTarget;    
+    private Transform rotateTarget;    
     [SerializeField]
-    private float _rotationSpeed = 3;
+    private float rotationSpeed = 3;
 
-    private bool _rotate = false;
+    private bool rotate = false;
     // Use this for initialization
     private void Start () {
-        if (_rotateTarget == null)
-            _rotateTarget = transform.GetChild(0).transform;
+        if (rotateTarget == null)
+            rotateTarget = transform.GetChild(0).transform;
 
         StartSpin();
         
@@ -34,9 +34,9 @@ public class RandomSpin : MonoBehaviour {
     /// </summary>
     public void StartSpin()
     {
-        if (_rotate) return;
+        if (rotate) return;
 
-        _rotate = true;
+        rotate = true;
         StartCoroutine(Spin());
     }
 
@@ -58,7 +58,7 @@ public class RandomSpin : MonoBehaviour {
     /// 
     /// </summary>
     private void OnDestroy() {
-        _rotate = false;
+        rotate = false;
         StopAllCoroutines();
 
     }
@@ -69,10 +69,10 @@ public class RandomSpin : MonoBehaviour {
     /// <returns></returns>
     IEnumerator Spin()
     {
-        _rotateTarget.rotation = RandomRotation();
-        while (_rotate)
+        rotateTarget.rotation = RandomRotation();
+        while (rotate)
         {
-            _rotateTarget.Rotate(_rotateTarget.forward * Time.deltaTime * _rotationSpeed * 50);
+            rotateTarget.Rotate(rotateTarget.forward * Time.deltaTime * rotationSpeed * 50);
             yield return null;
         }
     }

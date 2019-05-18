@@ -16,9 +16,9 @@ using UnityEngine;
 public class InputController : MonoBehaviour {
 
     [SerializeField]
-    private MissileLauncher _missileControl;
+    private MissileLauncher missileControl;
     [SerializeField]
-    private ParticleSystem _thrustParticles;
+    private ParticleSystem thrustParticles;
 
     public delegate void MoveUp();
     public static event MoveUp OnMoveUp;
@@ -41,12 +41,12 @@ public class InputController : MonoBehaviour {
     void Initialize()
     {
         player = GetComponent<Player>();
-        _missileControl = GetComponent<MissileLauncher>();
-        if (_thrustParticles == null)
+        missileControl = GetComponent<MissileLauncher>();
+        if (thrustParticles == null)
         {
             Debug.Log("Thrust particles not assigned");
         }
-        OnActionPress += _missileControl.ShootMissile;
+        OnActionPress += missileControl.ShootMissile;
         OnMoveUp += Thrust;
     }
 
@@ -80,7 +80,7 @@ public class InputController : MonoBehaviour {
         else
             {
                 player.Slow();
-                _thrustParticles.Stop();
+                thrustParticles.Stop();
             }
 
         if (Input.GetButtonDown("Shoot")) {
@@ -94,8 +94,8 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void Thrust() {
         player.Thrust(Input.GetAxis("Vertical"));
-        if (!_thrustParticles.isPlaying)
-            _thrustParticles.Play();
+        if (!thrustParticles.isPlaying)
+            thrustParticles.Play();
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void OnDestroy() {
         //must unsubscribe before destroying
-        OnActionPress -= _missileControl.ShootMissile;
+        OnActionPress -= missileControl.ShootMissile;
         OnMoveUp -= Thrust;
     }
 }

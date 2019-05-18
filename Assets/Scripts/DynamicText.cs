@@ -12,29 +12,29 @@ using UnityEngine.UI;
 
 public class DynamicText : MonoBehaviour {
     
-    private Text _text;
-    private RectTransform _rectTransform;
+    private Text text;
+    private RectTransform rectTransform;
     [SerializeField]
-    private float _displayTime = 2f;
+    private float displayTime = 2f;
 
 	// Use this for initialization
 	void Start () {
-        _text = GetComponent<Text>();
-        _rectTransform = GetComponent<RectTransform>();
+        text = GetComponent<Text>();
+        rectTransform = GetComponent<RectTransform>();
 	}
 
     public void SetTextAndPosition(string textToDisplay, Vector3 worldPosition)
     {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
 
-        _text.text = textToDisplay;
-        _rectTransform.position = screenPosition;
+        text.text = textToDisplay;
+        rectTransform.position = screenPosition;
         //clear after delay
-        Invoke("ClearDynamicText", _displayTime);
+        Invoke("ClearDynamicText", displayTime);
     }
 
     private void ClearDynamicText()
     {
-        _text.text = "";
+        text.text = "";
     }
 }

@@ -18,13 +18,13 @@ public class CollisionEffect : MonoBehaviour {
     #region Public Variables
     //the effect to spawn on collision
     [SerializeField]
-    private GameObject _particleEffect;
+    private GameObject particleEffect;
     [SerializeField]
-    private bool _destroyOnCollision;
+    private bool destroyOnCollision;
 
     //the tag to check for on object collision
     [SerializeField]
-    private string _tagName;
+    private string tagName;
     #endregion
 
     #region Functions
@@ -33,7 +33,7 @@ public class CollisionEffect : MonoBehaviour {
     /// </summary>
     private void Start() {
         //check for null reference
-        if (_tagName == null)
+        if (tagName == null)
             Debug.Log("TagName is not assigned");
     }
 
@@ -44,9 +44,9 @@ public class CollisionEffect : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
         //check for tag
-        if (other.tag == _tagName) {
+        if (other.tag == tagName) {
             CreateParticles();
-            if(_destroyOnCollision)
+            if(destroyOnCollision)
                 Destroy(gameObject);
         }
     }
@@ -56,7 +56,7 @@ public class CollisionEffect : MonoBehaviour {
     /// </summary>
     private void CreateParticles() {
         //spawn particles just above object to make more visible from top view
-        GameObject particles = Instantiate(_particleEffect, transform.position + Vector3.up, transform.rotation);
+        GameObject particles = Instantiate(particleEffect, transform.position + Vector3.up, transform.rotation);
     }
     #endregion
 }

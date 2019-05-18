@@ -16,27 +16,27 @@ public class SpawnController : MonoBehaviour {
 
     //different asteroids to spawn (Order is important)
     [SerializeField]
-    private Pool _smallAsteroidPool;
+    private Pool smallAsteroidPool;
     [SerializeField]
-    private Pool _mediumAsteroidPool;
+    private Pool mediumAsteroidPool;
     [SerializeField]
-    private Pool _largeAsteroidPool;
+    private Pool largeAsteroidPool;
 
     [SerializeField]
-    private GameObject[] _itemPrefabs;
+    private GameObject[] itemPrefabs;
 
     //list of different spawn points
     [SerializeField]
-    private SpawnPoint[] _spawnPoints;
+    private SpawnPoint[] spawnPoints;
     //frequency of spawning
     [SerializeField]
-    private float _spawnInterval = 3f;    
+    private float spawnInterval = 3f;    
     //keep track of total asteroids spawned
     [SerializeField]
-    private int _totalAsteroidsSpawned = 0;
+    private int totalAsteroidsSpawned = 0;
     //limit number of active asteroids (for performance)
     [SerializeField]
-    private int _activeAsteroidLimit = 50;
+    private int activeAsteroidLimit = 50;
 
     [SerializeField]
     private float smallAsteroidSpawnOffset = 0.5f;
@@ -44,13 +44,13 @@ public class SpawnController : MonoBehaviour {
     private float mediumAsteroidSpawnOffset = 1f;
 
     //used to prevent same point spawning multiple times 
-    private int _lastSpawnPoint = -1;
+    private int lastSpawnPoint = -1;
     //flag used to prevent/trigger spawning
-    private bool _spawning = false;
+    private bool spawning = false;
     //object used as parent for all asteroids for scene organization
-    private GameObject _asteroidParent;
+    private GameObject asteroidParent;
 
-    private GameObject _spawnRotation;
+    private GameObject spawnRotation;
 
 
     /// <summary>
@@ -58,7 +58,7 @@ public class SpawnController : MonoBehaviour {
     /// </summary>
     void Start () {
         AssignSpawnPoints();
-        if (_smallAsteroidPool == null)
+        if (smallAsteroidPool == null)
             Debug.Log("Asteroid prefab array not assigned");
 
         Instantiate();
@@ -71,8 +71,8 @@ public class SpawnController : MonoBehaviour {
     /// </summary>
     private void Instantiate()
     {
-        _asteroidParent = new GameObject("Asteroids");
-        _spawnRotation = new GameObject("Spawn Rotation");
+        asteroidParent = new GameObject("Asteroids");
+        spawnRotation = new GameObject("Spawn Rotation");
 
         
     }
@@ -80,10 +80,10 @@ public class SpawnController : MonoBehaviour {
     /// Called at start, used to automatically assign spawn points
     /// </summary>
     void AssignSpawnPoints() {
-        _spawnPoints = new SpawnPoint[transform.childCount];
-        for (int i = 0; i < _spawnPoints.Length; i++)
+        spawnPoints = new SpawnPoint[transform.childCount];
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            _spawnPoints[i] = transform.GetChild(i).GetComponent<SpawnPoint>();
+            spawnPoints[i] = transform.GetChild(i).GetComponent<SpawnPoint>();
         }
     }
 
@@ -97,11 +97,11 @@ public class SpawnController : MonoBehaviour {
         float timer = 0;
         SpawnRandomAsteroid();
 
-        while (_spawning)
+        while (spawning)
         {
             Debug.Log("Spawn 1 asteroid");
             timer += Time.deltaTime;
-            if (timer > _spawnInterval && Asteroid.CurrentAsteroidCount < _activeAsteroidLimit)
+            if (timer > spawnInterval && Asteroid.CurrentAsteroidCount < activeAsteroidLimit)
             {
                 timer = 0;
                 SpawnRandomAsteroid();
@@ -117,11 +117,11 @@ public class SpawnController : MonoBehaviour {
     private void SpawnRandomAsteroid()
     {
         SpawnPoint sp = RandomSpawnPoint();
-        _spawnRotation.transform.rotation = sp.transform.rotation;
-        _spawnRotation.transform.Rotate(0, Random.Range(-sp.MaxYRotation, sp.MaxYRotation), 0);
+        spawnRotation.transform.rotation = sp.transform.rotation;
+        spawnRotation.transform.Rotate(0, Random.Range(-sp.MaxYRotation, sp.MaxYRotation), 0);
 
         
-        GameObject pooledObject = _largeAsteroidPool.GetObject();
+        GameObject pooledObject = largeAsteroidPool.GetObject();
         pooledObject.transform.position = sp.transform.position;
         pooledObject.transform.rotation = sp.transform.rotation;
         pooledObject.SetActive(true);
@@ -134,8 +134,8 @@ public class SpawnController : MonoBehaviour {
     public void StartSpawning()
     {
         Debug.Log("Start spawning");
-        if (!_spawning) { 
-            _spawning = true;
+        if (!spawning) { 
+            spawning = true;
             StartCoroutine(AsteroidSpawnLoop());
         }
     }
@@ -144,9 +144,9 @@ public class SpawnController : MonoBehaviour {
     /// Stops the spawning coroutine
     /// </summary>
     public void StopSpawning() {
-        if (_spawning)
+        if (spawning)
         {
-            _spawning = false;
+            spawning = false;
             StopCoroutine(AsteroidSpawnLoop());
         }
     }
@@ -170,13 +170,13 @@ public class SpawnController : MonoBehaviour {
             offset = -offset;
 
             
-            GameObject pooledObject = _smallAsteroidPool.GetObject();
+            GameObject pooledObject = smallAsteroidPool.GetObject();
             pooledObject.transform.position = position - offset;
             pooledObject.transform.rotation = rotation;
             pooledObject.SetActive(true);
             //TODO Fix pool logic
-            //GameObject asteroid = Instantiate(_asteroidPoolPrefabs[0], position - offset,
-            //  rotation, _asteroidParent.transform);
+            //GameObject asteroid = Instantiate(asteroidPoolPrefabs[0], position - offset,
+            //  rotation, asteroidParent.transform);
         }
 
     }
@@ -199,13 +199,13 @@ public class SpawnController : MonoBehaviour {
             rotation.z = -rotation.z;
             offset = -offset;
 
-            GameObject pooledObject = _mediumAsteroidPool.GetObject();
+            GameObject pooledObject = mediumAsteroidPool.GetObject();
             pooledObject.transform.position = position - offset;
             pooledObject.transform.rotation = rotation;
             pooledObject.SetActive(true);
             //TODO Pool logic
-            //GameObject asteroid = Instantiate(_asteroidPoolPrefabs[1], position + offset,
-            //  rotation, _asteroidParent.transform);
+            //GameObject asteroid = Instantiate(asteroidPoolPrefabs[1], position + offset,
+            //  rotation, asteroidParent.transform);
 
         }
     }
@@ -226,12 +226,12 @@ public class SpawnController : MonoBehaviour {
     /// <returns>SpawnPoint : Used to determine spawn position and rotation of Asteroid</returns>
     public SpawnPoint RandomSpawnPoint() {
 
-        int index = Random.Range(0, _spawnPoints.Length);
-        while (index == _lastSpawnPoint)
-            index = Random.Range(0, _spawnPoints.Length);
+        int index = Random.Range(0, spawnPoints.Length);
+        while (index == lastSpawnPoint)
+            index = Random.Range(0, spawnPoints.Length);
 
-        _lastSpawnPoint = index;
-        return _spawnPoints[index];
+        lastSpawnPoint = index;
+        return spawnPoints[index];
     }
 
 }

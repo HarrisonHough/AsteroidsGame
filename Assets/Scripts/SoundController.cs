@@ -12,7 +12,7 @@ using UnityEngine;
 public class SoundController : MonoBehaviour {
 
     public AudioClip[] Audio;
-    private AudioSource _source;
+    private AudioSource source;
     /*
         Audio array order
         0 - Button
@@ -27,7 +27,7 @@ public class SoundController : MonoBehaviour {
     /// 
     /// </summary>
     private void Start() {
-       _source = GetComponent<AudioSource>();
+       source = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -35,21 +35,21 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void Collision() {
         int i = Random.Range(1,2);
-       _source.PlayOneShot(Audio[i]);
+       source.PlayOneShot(Audio[i]);
     }
 
     /// <summary>
     /// Play button press sound
     /// </summary>
     public void ButtonPress() {
-       _source.PlayOneShot(Audio[0]);
+       source.PlayOneShot(Audio[0]);
     }
 
     /// <summary>
     /// Play player shoot sound
     /// </summary>
     public void PlayerShoot() {
-       _source.PlayOneShot(Audio[5]);
+       source.PlayOneShot(Audio[5]);
     }
 
     /// <summary>
@@ -57,6 +57,6 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void PlayerExplode() {
         int i = Random.Range(3,4);
-       _source.PlayOneShot(Audio[i]);
+       source.PlayOneShot(Audio[i]);
     }
 }

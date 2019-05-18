@@ -13,18 +13,18 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
        
     [SerializeField]
-    private Vector2 _speedRange;
+    private Vector2 speedRange;
     [SerializeField]
-    private int _pointsForKilling;
+    private int pointsForKilling;
 
-    private ConstantVelocity _velocity;
+    private ConstantVelocity velocity;
 
     /// <summary>
     /// Used for initialization
     /// </summary>
     protected virtual void Start()
     {
-        _velocity = GetComponent<ConstantVelocity>();
+        velocity = GetComponent<ConstantVelocity>();
         SetInitialVelocity();
 
         
@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour {
     /// Sets the initial velocity
     /// </summary>
     private void SetInitialVelocity() {
-        float speed = Random.Range(_speedRange.x, _speedRange.y);
-        _velocity.ConstantSpeed = speed;
+        float speed = Random.Range(speedRange.x, speedRange.y);
+        velocity.ConstantSpeed = speed;
     }
 
     

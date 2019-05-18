@@ -18,8 +18,8 @@ public class ParticleDestroy : MonoBehaviour {
     #region Variables
     // Time to wait after particle sim completetion before destroying
     [SerializeField] 
-    private float _timeBuffer = 0.2f;
-    private ParticleSystem _particle;
+    private float timeBuffer = 0.2f;
+    private ParticleSystem particle;
     #endregion
 
     #region Functions
@@ -28,13 +28,13 @@ public class ParticleDestroy : MonoBehaviour {
     /// </summary>
     private void Start () {
         // store reference to particle system
-        _particle = GetComponent<ParticleSystem>();
+        particle = GetComponent<ParticleSystem>();
 
         // Start destroy timer
         StartCoroutine(AutoDestroy());
 
-        if (!_particle.isPlaying)
-            _particle.Play();
+        if (!particle.isPlaying)
+            particle.Play();
 	}
 
     /// <summary>
@@ -43,7 +43,7 @@ public class ParticleDestroy : MonoBehaviour {
     /// <returns>IENumerator : Required for Coroutine</returns>
     IEnumerator AutoDestroy()
     {
-        yield return new WaitForSeconds(_particle.main.duration + _timeBuffer);
+        yield return new WaitForSeconds(particle.main.duration + timeBuffer);
         Destroy(gameObject);
             
     }

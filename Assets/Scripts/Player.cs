@@ -17,20 +17,20 @@ using UnityEngine;
 public class Player : MonoBehaviour {
         
     [Range(0,5)][SerializeField]
-    private float _rotateSpeed = 1;
+    private float rotateSpeed = 1;
     [SerializeField]
-    private float _thrustPower = 50;
+    private float thrustPower = 50;
     [SerializeField]
-    private float _stopSpeed = 2;
+    private float stopSpeed = 2;
     [SerializeField]
-    private GameObject _explosion;
+    private GameObject explosion;
     [SerializeField]
-    private GameObject _shield;
+    private GameObject shield;
     [SerializeField]
-    private float _shieldDuration;
+    private float shieldDuration;
 
-    private Item _item;
-    private Rigidbody _rb;
+    private Item item;
+    private Rigidbody rb;
 
     /// <summary>
     /// Use this for initialization
@@ -44,8 +44,8 @@ public class Player : MonoBehaviour {
     /// </summary>
     void Initialize()
     {
-        _rb = GetComponent<Rigidbody>();
-        _shield.SetActive(false);
+        rb = GetComponent<Rigidbody>();
+        shield.SetActive(false);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
             Death();
         }
         else if (other.tag == "Item") {
-           _item = other.gameObject.GetComponent<Item>();
+           item = other.gameObject.GetComponent<Item>();
             CheckItem();
         }
     }
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
     /// 
     /// </summary>
     void CheckItem() {
-        switch (_item.Type) {
+        switch (item.Type) {
             case ItemType.Shield:
                 TurnOnShield();
                 break;
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour {
 
                 break;
         }
-        _item.Destroy();
+        item.Destroy();
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour {
     /// <param name="value"></param>
     public void Rotate(float value) {
 
-        transform.Rotate(0, Time.deltaTime* value * (_rotateSpeed * 100),0 );
+        transform.Rotate(0, Time.deltaTime* value * (rotateSpeed * 100),0 );
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
     /// <param name="target"></param>
     public void MouseLook(Vector3 target) {
         target.y = 0;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, target, _rotateSpeed/20,0.0F);
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, target, rotateSpeed/20,0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
     }
 
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour {
     public void Thrust(float value) {
 
         //move object by adding force behind it
-        _rb.AddForce(transform.forward * _thrustPower);
+        rb.AddForce(transform.forward * thrustPower);
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour {
     public void Slow() {
 
         //slows down rigidbody (self)
-        _rb.velocity = Vector3.Lerp(_rb.velocity, Vector3.zero, Time.deltaTime * 2);
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.deltaTime * 2);
     }
 
     /// <summary>
@@ -150,10 +150,10 @@ public class Player : MonoBehaviour {
     /// <returns></returns>
     IEnumerator ShieldOn() {
 
-        _shield.SetActive(true);
-        yield return new WaitForSeconds(_shieldDuration);
+        shield.SetActive(true);
+        yield return new WaitForSeconds(shieldDuration);
 
         //TODO add warning for when shield about to run out
-        _shield.SetActive(false);
+        shield.SetActive(false);
     }
 }

@@ -20,19 +20,19 @@ public class GameManager : MonoBehaviour {
     public static int HighScore;
 
     [SerializeField]
-    private GameObject _playerPrefab;
+    private GameObject playerPrefab;
     [SerializeField]
-    private SpawnController _spawner;
+    private SpawnController spawner;
     [SerializeField]
-    private UIControl _uiControl;    
+    private UIControl uiControl;    
     [SerializeField]
-    private int _lives;    
+    private int lives;    
     [SerializeField]
-    private Player _player;
+    private Player player;
 
-    private SoundController _soundControl;
-    public SoundController SoundControl { get { return _soundControl; } }
-    private bool _gameOver = false;
+    private SoundController soundControl;
+    public SoundController SoundControl { get { return soundControl; } }
+    private bool gameOver = false;
     
 
     /// <summary>
@@ -79,10 +79,10 @@ public class GameManager : MonoBehaviour {
         else
             HighScore = PlayerPrefs.GetInt("HighScore");
 
-        if (_player == null)
-            _player = FindObjectOfType<Player>();
-        _player.gameObject.SetActive(false);
-        _soundControl = GetComponent<SoundController>();
+        if (player == null)
+            player = FindObjectOfType<Player>();
+        player.gameObject.SetActive(false);
+        soundControl = GetComponent<SoundController>();
     }
 
     /// <summary>
@@ -91,10 +91,10 @@ public class GameManager : MonoBehaviour {
     void Start() {
         //check for null references
         //assign if null
-        if (_spawner == null)
-            _spawner = FindObjectOfType<SpawnController>();
-        if (_uiControl == null)
-            _uiControl = FindObjectOfType<UIControl>();
+        if (spawner == null)
+            spawner = FindObjectOfType<SpawnController>();
+        if (uiControl == null)
+            uiControl = FindObjectOfType<UIControl>();
     }
 
     /// <summary>
@@ -102,29 +102,29 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <param name="asteroid"></param>
     public void AsteroidHit(Asteroid asteroid) {
-        if (!_gameOver)
+        if (!gameOver)
         {
             int type = (int)asteroid.AsteroidType;
             switch (type)
             {
                 case 0:
                     AddScore(10);
-                    _uiControl.ShowTextAtPosition(""+10,asteroid.transform.position);
+                    uiControl.ShowTextAtPosition(""+10,asteroid.transform.position);
                     break;
                 case 1:
                     AddScore(25);
-                    _uiControl.ShowTextAtPosition("" + 25, asteroid.transform.position);
-                    _spawner.SpawnSmallAsteroid(asteroid.transform.position);
+                    uiControl.ShowTextAtPosition("" + 25, asteroid.transform.position);
+                    spawner.SpawnSmallAsteroid(asteroid.transform.position);
                     break;
                 case 2:
                     AddScore(50);
-                    _uiControl.ShowTextAtPosition("" + 50, asteroid.transform.position);
-                    _spawner.SpawnMediumAsteroid(asteroid.transform.position);
+                    uiControl.ShowTextAtPosition("" + 50, asteroid.transform.position);
+                    spawner.SpawnMediumAsteroid(asteroid.transform.position);
                     break;
 
             }
         }
-        _soundControl.PlayerExplode();
+        soundControl.PlayerExplode();
 
         Destroy(asteroid.gameObject);
     }
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour {
         Score += scoreToAdd;
 
         //update score UI
-        _uiControl.UpdateScore(Score);
+        uiControl.UpdateScore(Score);
 
     }
 
@@ -156,9 +156,9 @@ public class GameManager : MonoBehaviour {
     /// Spawns player at zero position
     /// </summary>
     public void SpawnPlayer() {
-        _player.transform.position = new Vector3(0, 0, 0);
-        _player.transform.rotation = Quaternion.identity;
-        _player.gameObject.SetActive(true);
+        player.transform.position = new Vector3(0, 0, 0);
+        player.transform.rotation = Quaternion.identity;
+        player.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -169,12 +169,12 @@ public class GameManager : MonoBehaviour {
 
         Debug.Log("Player Died!!!!!!");
         //check number of lives
-        if (_lives > 0)
+        if (lives > 0)
         {
             //decrement lives count
-            _lives--;
+            lives--;
             //update lives UI
-            _uiControl.UpdateLives(_lives);
+            uiControl.UpdateLives(lives);
             //spawn player after a delay
             StartCoroutine(DelaySpawn());
         }
@@ -197,9 +197,9 @@ public class GameManager : MonoBehaviour {
     /// called when the games over
     /// </summary>
     void GameOver() {
-        _gameOver = true;
-        _spawner.StopSpawning();
-        _uiControl.ShowHomeScreen();
+        gameOver = true;
+        spawner.StopSpawning();
+        uiControl.ShowHomeScreen();
         CheckForHighScore();
 
         
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetInt("HighScore", Score);
         PlayerPrefs.Save();
 
-        _uiControl.UpdateHomeUIScores();
+        uiControl.UpdateHomeUIScores();
     }
 
     /// <summary>
@@ -235,8 +235,8 @@ public class GameManager : MonoBehaviour {
         ResetGameValues();
         ResetUIDisplayText();
         SpawnPlayer();
-        _spawner.StartSpawning();
-        _gameOver = false;
+        spawner.StartSpawning();
+        gameOver = false;
     }
 
     /// <summary>
@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour {
         LastScore = Score;
         PlayerPrefs.SetInt("LastScore", LastScore);
         PlayerPrefs.Save();
-        _uiControl.UpdateHomeUIScores();
+        uiControl.UpdateHomeUIScores();
     }
     
     /// <summary>
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour {
     {
         //reset values
         Score = 0;
-        _lives = 3;
+        lives = 3;
     }
 
     /// <summary>
@@ -265,8 +265,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     private void ResetUIDisplayText() {
         //reset ui display text
-        _uiControl.UpdateScore(0);
-        _uiControl.UpdateLives(3);
+        uiControl.UpdateScore(0);
+        uiControl.UpdateLives(3);
     }
 
     /// <summary>

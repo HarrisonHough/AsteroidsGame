@@ -15,7 +15,7 @@ public class Item : MonoBehaviour {
 
     
     public ItemType Type;
-    private ConstantVelocity _velocity;
+    private ConstantVelocity velocity;
     public Vector2 SpeedRange;
 
     /// <summary>
@@ -23,9 +23,9 @@ public class Item : MonoBehaviour {
     /// </summary>
     void Start()
     {
-        _velocity = GetComponent<ConstantVelocity>();
+        velocity = GetComponent<ConstantVelocity>();
         float speed = Random.Range(SpeedRange.x, SpeedRange.y);
-        _velocity.ConstantSpeed = speed;
+        velocity.ConstantSpeed = speed;
 
     }
 

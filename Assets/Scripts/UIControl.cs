@@ -18,26 +18,26 @@ public class UIControl : MonoBehaviour {
 
     #region Public Variables
     [SerializeField]
-    private Text _scoreText;
+    private Text scoreText;
     [SerializeField]
-    private Text _livesText;
+    private Text livesText;
 
     [SerializeField]
-    private Text _lastScoreText;
+    private Text lastScoreText;
     [SerializeField]
-    private Text _highScoreText;
+    private Text highScoreText;
 
     [SerializeField]
-    private GameObject _gameUIPanel;
+    private GameObject gameUIPanel;
     [SerializeField]
-    private GameObject _homeScreenPanel;
+    private GameObject homeScreenPanel;
 
     [SerializeField]
-    private int _dynamicTextArrayLength = 10;
-    private int _dynamicTextArrayIndex = 0;
+    private int dynamicTextArrayLength = 10;
+    private int dynamicTextArrayIndex = 0;
     [SerializeField]
-    private GameObject _dynamicTextArrayHolder;
-    private DynamicText[] _dynamicTextArray;
+    private GameObject dynamicTextArrayHolder;
+    private DynamicText[] dynamicTextArray;
 
     #endregion
 
@@ -51,26 +51,26 @@ public class UIControl : MonoBehaviour {
 
     private void CreateTextArray()
     {
-        _dynamicTextArray = new DynamicText[_dynamicTextArrayLength];
-        GameObject dynamicTextObject = _dynamicTextArrayHolder.transform.GetChild(0).gameObject;
+        dynamicTextArray = new DynamicText[dynamicTextArrayLength];
+        GameObject dynamicTextObject = dynamicTextArrayHolder.transform.GetChild(0).gameObject;
 
         //assign first dynamic text as it already exists
-        _dynamicTextArray[0] = dynamicTextObject.GetComponent<DynamicText>();
-        for (int i = 1; i < _dynamicTextArrayLength; i++)
+        dynamicTextArray[0] = dynamicTextObject.GetComponent<DynamicText>();
+        for (int i = 1; i < dynamicTextArrayLength; i++)
         {
             //create new dynamic text by duplicating the existing one and parent to dynamicTextArrayHolder
-            _dynamicTextArray[i] = Instantiate(dynamicTextObject, _dynamicTextArrayHolder.transform).GetComponent<DynamicText>();
+            dynamicTextArray[i] = Instantiate(dynamicTextObject, dynamicTextArrayHolder.transform).GetComponent<DynamicText>();
         }
 
     }
 
     public void ShowTextAtPosition(string textToDisplay, Vector3 worldPosition)
     {
-        _dynamicTextArray[_dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, worldPosition);
-        _dynamicTextArrayIndex++;
-        if (_dynamicTextArrayIndex >= _dynamicTextArrayLength)
+        dynamicTextArray[dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, worldPosition);
+        dynamicTextArrayIndex++;
+        if (dynamicTextArrayIndex >= dynamicTextArrayLength)
         {
-            _dynamicTextArrayIndex = 0;
+            dynamicTextArrayIndex = 0;
         }
     }
 
@@ -85,7 +85,7 @@ public class UIControl : MonoBehaviour {
     /// <param name="score">Int: Score value to display</param>
     public void UpdateScore(int score) {
         
-        _scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + score;
     }
 
     /// <summary>
@@ -94,29 +94,29 @@ public class UIControl : MonoBehaviour {
     /// <param name="lives">Lives: Lives value to display</param>
     public void UpdateLives(int lives)
     {
-        _livesText.text = "Lives: " + lives;
+        livesText.text = "Lives: " + lives;
     }
 
     /// <summary>
     /// Updates Score on HomeUI (menu) panel
     /// </summary>
     public void UpdateHomeUIScores() {
-        _lastScoreText.text = "Last Score : " + GameManager.LastScore;
-        _highScoreText.text = "Best Score : " + GameManager.HighScore;
+        lastScoreText.text = "Last Score : " + GameManager.LastScore;
+        highScoreText.text = "Best Score : " + GameManager.HighScore;
     }
 
     /// <summary>
     /// Enables Home screen panel
     /// </summary>
     public void ShowHomeScreen() {
-        _homeScreenPanel.SetActive(true);
+        homeScreenPanel.SetActive(true);
     }
 
     /// <summary>
     /// Triggers game start/ restart
     /// </summary>
     public void StartGame() {
-        _homeScreenPanel.SetActive(false);
+        homeScreenPanel.SetActive(false);
         GameManager.Instance.StartGame();
     }
 
@@ -124,7 +124,7 @@ public class UIControl : MonoBehaviour {
     /// Exit/Quits the game
     /// </summary>
     public void ExitGame() {
-#if UNITY_EDITOR
+#if UNITYEDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
