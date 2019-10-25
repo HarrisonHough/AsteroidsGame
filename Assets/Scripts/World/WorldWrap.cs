@@ -22,7 +22,7 @@ public class WorldWrap : MonoBehaviour
     private float worldWrapPositionOffset = 0.5f;
     private float maxPositionX;
     private float maxPositionZ;
-
+    private const string COLLISION_TAG = "WorldBox";
 
     /// <summary>
     /// Use this for initialization
@@ -41,7 +41,8 @@ public class WorldWrap : MonoBehaviour
     /// <param name="other">Collider: Collider of the object trigger</param>
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "WorldBox")
+        Debug.Log("ON TRIGGER ENTER CALLED");
+        if (other.tag.Contains(COLLISION_TAG))
             Debug.Log("Entered World");
     }
 
@@ -52,9 +53,10 @@ public class WorldWrap : MonoBehaviour
     /// <param name="other">Collider: Collider of the object trigger</param>
     void OnTriggerExit(Collider other)
     {
+        Debug.Log("ON TRIGGER EXIT CALLED");
         //Debug.Log("Exited World");
         //Check when leaving world box
-        if (other.tag == "WorldBox")
+        if (other.tag.Contains(COLLISION_TAG))
         {
             Debug.Log("EXITING WORLD BOX");
             CheckPositionAndWrap();
