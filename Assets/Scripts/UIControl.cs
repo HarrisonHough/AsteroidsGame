@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 /*
 * AUTHOR: Harrison Hough   
 * COPYRIGHT: Harrison Hough 2018
@@ -16,16 +16,16 @@ using UnityEngine.UI;
 /// </summary>
 public class UIControl : MonoBehaviour {
 
-    #region Public Variables
+    #region Local Variables
     [SerializeField]
-    private Text scoreText;
+    private TextMeshProUGUI scoreText;
     [SerializeField]
-    private Text livesText;
+    private TextMeshProUGUI livesText;
 
     [SerializeField]
-    private Text lastScoreText;
+    private TextMeshProUGUI lastScoreText;
     [SerializeField]
-    private Text highScoreText;
+    private TextMeshProUGUI highScoreText;
 
     [SerializeField]
     private GameObject gameUIPanel;
@@ -76,7 +76,13 @@ public class UIControl : MonoBehaviour {
 
     public void ShowTextAtPosition(string textToDisplay, Vector2 screenPosition)
     {
+        dynamicTextArray[dynamicTextArrayIndex].SetTextAndPosition(textToDisplay, screenPosition);
 
+        dynamicTextArrayIndex++;
+        if (dynamicTextArrayIndex >= dynamicTextArrayLength)
+        {
+            dynamicTextArrayIndex = 0;
+        }
     }
 
     /// <summary>
@@ -123,12 +129,12 @@ public class UIControl : MonoBehaviour {
     /// <summary>
     /// Exit/Quits the game
     /// </summary>
-    public void ExitGame() {
-#if UNITYEDITOR
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif
-
     }
 }

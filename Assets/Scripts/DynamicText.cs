@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using TMPro;
 
 /*
 * AUTHOR: Harrison Hough   
@@ -12,14 +10,14 @@ using UnityEngine.UI;
 
 public class DynamicText : MonoBehaviour {
     
-    private Text text;
+    private TextMeshProUGUI text;
     private RectTransform rectTransform;
     [SerializeField]
     private float displayTime = 2f;
 
 	// Use this for initialization
 	void Start () {
-        text = GetComponent<Text>();
+        text = GetComponent<TextMeshProUGUI>();
         rectTransform = GetComponent<RectTransform>();
 	}
 
