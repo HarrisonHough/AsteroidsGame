@@ -35,21 +35,21 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void Collision() {
         int i = Random.Range(1,2);
-       source.PlayOneShot(Audio[i]);
+       PlaySound(i);
     }
 
     /// <summary>
     /// Play button press sound
     /// </summary>
     public void ButtonPress() {
-       source.PlayOneShot(Audio[0]);
+       PlaySound(0);
     }
 
     /// <summary>
     /// Play player shoot sound
     /// </summary>
     public void PlayerShoot() {
-       source.PlayOneShot(Audio[5]);
+        PlaySound(5);
     }
 
     /// <summary>
@@ -57,6 +57,12 @@ public class SoundController : MonoBehaviour {
     /// </summary>
     public void PlayerExplode() {
         int i = Random.Range(3,4);
-       source.PlayOneShot(Audio[i]);
+        PlaySound(i);
+    }
+
+    public void PlaySound(int i)
+    {
+        if(Audio.Length > i)
+            source.PlayOneShot(Audio[i]);
     }
 }

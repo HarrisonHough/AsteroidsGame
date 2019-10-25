@@ -56,6 +56,7 @@ public class WorldWrap : MonoBehaviour
         //Check when leaving world box
         if (other.tag == "WorldBox")
         {
+            Debug.Log("EXITING WORLD BOX");
             CheckPositionAndWrap();
         }
     }
