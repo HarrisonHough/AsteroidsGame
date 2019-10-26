@@ -24,10 +24,7 @@ public class Missile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag.Contains("Enemy"))
-        {
-            Destroy();
-        }
+        Destroy();
     }
 
     /// <summary>
@@ -35,7 +32,7 @@ public class Missile : MonoBehaviour {
     /// </summary>
     /// <param name="other">Collider : The collider of the object trigger</param>
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "Enemy") {
+        if (other.tag.Contains("Enemy")) {
             Destroy();
         }
     }

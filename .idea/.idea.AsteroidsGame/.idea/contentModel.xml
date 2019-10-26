@@ -12,7 +12,6 @@
           <e p="ConstantVelocity.cs" t="Include" />
           <e p="Controllers" t="Include">
             <e p="InputController.cs" t="Include" />
-            <e p="PlayerController.cs" t="Include" />
             <e p="SoundController.cs" t="Include" />
             <e p="SpawnController.cs" t="Include" />
           </e>
@@ -29,12 +28,14 @@
           </e>
           <e p="ParticleDestroy.cs" t="Include" />
           <e p="Player.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
           <e p="Pooling" t="Include">
             <e p="Pool.cs" t="Include" />
             <e p="PoolMember.cs" t="Include" />
           </e>
           <e p="RandomSpin.cs" t="Include" />
           <e p="Shield.cs" t="Include" />
+          <e p="ShipMotor.cs" t="Include" />
           <e p="SpawnPoint.cs" t="Include" />
           <e p="UIControl.cs" t="Include" />
           <e p="World" t="Include">

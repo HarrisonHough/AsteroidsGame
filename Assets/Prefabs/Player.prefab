@@ -4919,6 +4919,8 @@ GameObject:
   - component: {fileID: 114980678966879494}
   - component: {fileID: 114938591607811200}
   - component: {fileID: 114880061954749328}
+  - component: {fileID: 8094576597014367675}
+  - component: {fileID: 3486800385510725606}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4965,7 +4967,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995665666526606}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -4985,8 +4987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecb1e094e15f364fa99404f4504434b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileControl: {fileID: 114980678966879494}
-  thrustParticles: {fileID: 198501940536867562}
 --- !u!114 &114401725636850384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4999,12 +4999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f5462f59be38b498e0b94362948ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 2
-  thrustPower: 10
-  stopSpeed: 2
-  explosion: {fileID: 1591573719728852, guid: d061bac87baf37747bf204e03ce8a918, type: 3}
-  shield: {fileID: 1814291434447634}
-  shieldDuration: 0
 --- !u!114 &114980678966879494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5048,6 +5042,35 @@ MonoBehaviour:
     type: 3}
   destroyOnCollision: 0
   tagName: Enemy
+--- !u!114 &8094576597014367675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995665666526606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb2c9cae41bd3d44a17f98ab9277218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustPower: 10
+  stopSpeed: 2
+--- !u!114 &3486800385510725606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995665666526606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b327848cea3dcac4e8663dced032963e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 3
+  shipMotor: {fileID: 8094576597014367675}
+  thrustParticles: {fileID: 198501940536867562}
 --- !u!1 &1637728206135019288
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,20 +16,12 @@ using UnityEngine;
 /// </summary>
 public class InputController : MonoBehaviour {
 
-    [SerializeField]
-    private MissileLauncher missileControl;
-    [SerializeField]
-    private ParticleSystem thrustParticles;
-
-    public delegate void MoveUp();
-    public static event MoveUp OnMoveUp;
-
     public static Action OnPrimaryFireAction;
     public static Action OnSecondaryFireAction;
+    public static Action OnYInputEndAction;
+
+    private bool NoInputY = false;
     
-
-    protected Player player;
-
     public float xInput
     {
         get;
@@ -54,7 +46,7 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void Initialize()
     {
-        OnPrimaryFireAction += missileControl.ShootMissile;
+        
     }
 
     /// <summary>
@@ -73,40 +65,18 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void KeyboardInput()
     {
+        
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
+        if(!NoInputY && yInput < 0.05f)
+            OnYInputEndAction?.Invoke();
         
-//TODO cleanup
-//        if (Input.GetAxis("Horizontal") != 0)
-//        {
-//            player.Rotate(Input.GetAxis("Horizontal"));
-//            
-//        }
-//        if (Input.GetAxis("Vertical") > 0)
-//        {
-//            OnMoveUp();            
-//            
-//        }
-//        else
-//            {
-//                player.Slow();
-//                thrustParticles.Stop();
-//            }
-
         if (Input.GetButtonDown("Shoot")) {
 
-            OnPrimaryFireAction.Invoke();
+            OnPrimaryFireAction?.Invoke();
         }
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    void Thrust() {
-        
-        player.Thrust(Input.GetAxis("Vertical"));
-        if (!thrustParticles.isPlaying)
-            thrustParticles.Play();
+        NoInputY = yInput < 0.05f;
     }
 
     /// <summary>

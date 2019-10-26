@@ -4394,5 +4394,15 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 54545308009409034, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8094576597014367675, guid: bb5ccdfed82a81b428cf91ab72c090eb,
+        type: 3}
+      propertyPath: thrustPower
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5ccdfed82a81b428cf91ab72c090eb, type: 3}
