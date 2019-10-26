@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,14 @@ public class Missile : MonoBehaviour {
 
     void OnEnable() {
         StartCoroutine(DestroyTimer());
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag.Contains("Enemy"))
+        {
+            Destroy();
+        }
     }
 
     /// <summary>

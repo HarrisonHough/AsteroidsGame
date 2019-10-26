@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,13 +49,20 @@ public class Player : MonoBehaviour {
         shield.SetActive(false);
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag.Contains("Enemy"))
+        {
+            Death();
+        }
+    }
+
     /// <summary>
     /// Called on collision to trigger Death function
     /// </summary>
     /// <param name="other"></param>
-    void OnTriggerEnter(Collider other) {
-
-
+    void OnTriggerEnter(Collider other) 
+    {
         if (other.tag == "Enemy")
         {
             Death();

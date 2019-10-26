@@ -36,6 +36,8 @@ public class CollisionEffect : MonoBehaviour {
         if (tagName == null)
             Debug.Log("TagName is not assigned");
     }
+    
+    
 
     /// <summary>
     /// Called on collision, triggers CreateParticles function
