@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,10 +23,23 @@ public class InputController : MonoBehaviour {
 
     public delegate void MoveUp();
     public static event MoveUp OnMoveUp;
-    public delegate void ActionPress();
-    public static event ActionPress OnActionPress;
+
+    public static Action OnPrimaryFireAction;
+    public static Action OnSecondaryFireAction;
+    
 
     protected Player player;
+
+    public float xInput
+    {
+        get;
+        private set;
+    }
+    public float yInput
+    {
+        get;
+        private set;
+    }
 
     /// <summary>
     /// Use this for initialization
@@ -40,14 +54,7 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void Initialize()
     {
-        player = GetComponent<Player>();
-        missileControl = GetComponent<MissileLauncher>();
-        if (thrustParticles == null)
-        {
-            Debug.Log("Thrust particles not assigned");
-        }
-        OnActionPress += missileControl.ShootMissile;
-        OnMoveUp += Thrust;
+        OnPrimaryFireAction += missileControl.ShootMissile;
     }
 
     /// <summary>
@@ -55,7 +62,7 @@ public class InputController : MonoBehaviour {
     /// Input is checked in here to ensure that physics are
     /// calculated correctly (player movement collisions)
     /// </summary>
-    void FixedUpdate()
+    void Update()
     {
         KeyboardInput();
     }
@@ -66,26 +73,29 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void KeyboardInput()
     {
-        if (Input.GetAxis("Horizontal") != 0)
-        {
-            player.Rotate(Input.GetAxis("Horizontal"));
-            
-        }
-
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            OnMoveUp();            
-            
-        }
-        else
-            {
-                player.Slow();
-                thrustParticles.Stop();
-            }
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
+        
+//TODO cleanup
+//        if (Input.GetAxis("Horizontal") != 0)
+//        {
+//            player.Rotate(Input.GetAxis("Horizontal"));
+//            
+//        }
+//        if (Input.GetAxis("Vertical") > 0)
+//        {
+//            OnMoveUp();            
+//            
+//        }
+//        else
+//            {
+//                player.Slow();
+//                thrustParticles.Stop();
+//            }
 
         if (Input.GetButtonDown("Shoot")) {
 
-            OnActionPress();
+            OnPrimaryFireAction.Invoke();
         }
     }
 
@@ -93,6 +103,7 @@ public class InputController : MonoBehaviour {
     /// 
     /// </summary>
     void Thrust() {
+        
         player.Thrust(Input.GetAxis("Vertical"));
         if (!thrustParticles.isPlaying)
             thrustParticles.Play();
@@ -103,7 +114,7 @@ public class InputController : MonoBehaviour {
     /// </summary>
     void OnDestroy() {
         //must unsubscribe before destroying
-        OnActionPress -= missileControl.ShootMissile;
-        OnMoveUp -= Thrust;
+        OnPrimaryFireAction = null;
+        OnSecondaryFireAction = null;
     }
 }

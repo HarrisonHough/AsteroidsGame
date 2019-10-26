@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,28 @@ public class Asteroid : Enemy {
         CurrentAsteroidCount++;
         TotalAsteroidCount++;
 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Player":
+                Hit();
+                break;
+            case "Missile":
+                HitByMissile();
+                break;
+            case "Border":
+                BorderHit();
+                break;
+            case "Enemy":
+                Hit();
+                break;
+            default:
+                //Hit();
+                break;
+        }
     }
 
     /// <summary>

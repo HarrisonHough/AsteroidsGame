@@ -4394,15 +4394,5 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54545308009409034, guid: bb5ccdfed82a81b428cf91ab72c090eb,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 54545308009409034, guid: bb5ccdfed82a81b428cf91ab72c090eb,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5ccdfed82a81b428cf91ab72c090eb, type: 3}

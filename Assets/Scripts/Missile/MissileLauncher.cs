@@ -27,13 +27,19 @@ public class MissileLauncher : MonoBehaviour {
     /// <summary>
     /// Use this for initialization
     /// </summary>
-    void Start () {
-
+    void Awake ()
+    {
+        InputController.OnSecondaryFireAction = ShootMissile;
         //check for null references
         if (missileSpawnPoint == null)
+        {
             Debug.Log("Must Assign Missile Spawn Point");
- 
+            transform.Find("Missile Spawn Point");
+        }
 
+        
+        
+        //TODO cleanup/optimise if neccessary
         soundControl = FindObjectOfType<SoundController>();
     }
 
@@ -46,12 +52,7 @@ public class MissileLauncher : MonoBehaviour {
         pooledMissile.transform.position = missileSpawnPoint.transform.position;
         pooledMissile.transform.rotation =  missileSpawnPoint.transform.rotation;
         pooledMissile.SetActive(true);
-
         
         soundControl.PlayerShoot();
-    }
-
-    void OnDestroy() {
-       // Destroy(missileParent);
     }
 }
