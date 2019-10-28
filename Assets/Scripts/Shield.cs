@@ -15,6 +15,7 @@ public class Shield : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        shield.SetActive(false);
         if(isSecondaryFire)
             InputController.OnSecondaryFireAction += Activate;
     }

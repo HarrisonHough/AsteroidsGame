@@ -15,10 +15,8 @@ using UnityEngine;
 /// asteroids in the game
 /// </summary>
 public class Asteroid : Enemy {
-
-
-    public enum Type {small, medium, large }
-    public Type AsteroidType;
+    
+    public AsteroidType Type;
     public static int CurrentAsteroidCount;
     public static int TotalAsteroidCount;
 
@@ -96,7 +94,7 @@ public class Asteroid : Enemy {
     /// </summary>
     private void HitByMissile() {
 
-        //Debug.Log("Missile hit an asteroid");
+        Debug.Log("Missile hit an asteroid");
 
         //send asteroid hit to GameManager
         GameManager.Instance.AsteroidHit(this);

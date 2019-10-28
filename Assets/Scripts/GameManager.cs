@@ -104,21 +104,21 @@ public class GameManager : MonoBehaviour {
     public void AsteroidHit(Asteroid asteroid) {
         if (!gameOver)
         {
-            int type = (int)asteroid.AsteroidType;
+            int type = (int)asteroid.Type;
             switch (type)
             {
                 case 0:
                     AddScore(10);
-                    uiControl.ShowTextAtPosition(""+10,asteroid.transform.position);
+                    uiControl.ShowTextAtPosition(""+ Global.SMALL_ASTEROID_POINTS,asteroid.transform.position);
                     break;
                 case 1:
                     AddScore(25);
-                    uiControl.ShowTextAtPosition("" + 25, asteroid.transform.position);
+                    uiControl.ShowTextAtPosition("" + Global.MEDIUM_ASTEROID_POINTS, asteroid.transform.position);
                     spawner.SpawnSmallAsteroid(asteroid.transform.position);
                     break;
                 case 2:
                     AddScore(50);
-                    uiControl.ShowTextAtPosition("" + 50, asteroid.transform.position);
+                    uiControl.ShowTextAtPosition("" + Global.LARGE_ASTEROID_POINTS, asteroid.transform.position);
                     spawner.SpawnMediumAsteroid(asteroid.transform.position);
                     break;
 

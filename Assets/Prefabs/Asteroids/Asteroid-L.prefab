@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedRange: {x: 0, y: 0}
   pointsForKilling: 0
-  AsteroidType: 0
+  Type: 2
 --- !u!114 &114945697350840272
 MonoBehaviour:
   m_ObjectHideFlags: 0
