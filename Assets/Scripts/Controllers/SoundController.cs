@@ -62,7 +62,11 @@ public class SoundController : MonoBehaviour {
 
     public void PlaySound(int i)
     {
-        if(Audio.Length > i)
+        Debug.Log($"PLAY AUDIO CALLED CLIP ARRAY LENGTH = {Audio.Length} INDEX = {i}");
+        if (Audio.Length > i)
+        {
+            Debug.Log("INDEX VALID PLAY AUDIO");
             source.PlayOneShot(Audio[i]);
+        }
     }
 }
