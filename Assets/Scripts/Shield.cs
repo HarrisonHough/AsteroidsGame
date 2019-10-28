@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class Shield : MonoBehaviour
@@ -9,11 +10,14 @@ public class Shield : MonoBehaviour
     private GameObject shield;
     [SerializeField]
     private float shieldDuration;
-    
+
+    private bool isSecondaryFire = false;
     // Start is called before the first frame update
     void Awake()
     {
-        InputController.OnSecondaryFireAction += Activate;
+        shield.SetActive(false);
+        if(isSecondaryFire)
+            InputController.OnSecondaryFireAction += Activate;
     }
     
     /// <summary>

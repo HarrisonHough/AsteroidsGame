@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,8 +37,17 @@ public class CollisionEffect : MonoBehaviour {
         if (tagName == null)
             Debug.Log("TagName is not assigned");
     }
-    
-    
+
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag.Contains(tagName)) {
+            CreateParticles();
+            if(destroyOnCollision)
+                Destroy(gameObject);
+        }
+    }
+
 
     /// <summary>
     /// Called on collision, triggers CreateParticles function
@@ -46,7 +56,7 @@ public class CollisionEffect : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
         //check for tag
-        if (other.tag == tagName) {
+        if (other.tag.Contains(tagName)) {
             CreateParticles();
             if(destroyOnCollision)
                 Destroy(gameObject);

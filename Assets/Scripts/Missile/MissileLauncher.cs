@@ -29,7 +29,7 @@ public class MissileLauncher : MonoBehaviour {
     /// </summary>
     void Awake ()
     {
-        InputController.OnSecondaryFireAction = ShootMissile;
+        InputController.OnPrimaryFireAction += ShootMissile;
         //check for null references
         if (missileSpawnPoint == null)
         {

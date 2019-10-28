@@ -95,16 +95,17 @@ public class SpawnController : MonoBehaviour {
 
         //used to store time passed
         float timer = 0;
-        SpawnRandomAsteroid();
+        SpawnAsteroid();
 
         while (spawning)
         {
-            Debug.Log("Spawn 1 asteroid");
+            
             timer += Time.deltaTime;
             if (timer > spawnInterval && Asteroid.CurrentAsteroidCount < activeAsteroidLimit)
             {
                 timer = 0;
-                SpawnRandomAsteroid();
+                Debug.Log("Spawn 1 asteroid");
+                SpawnAsteroid();
             }
 
             yield return null;
@@ -114,16 +115,37 @@ public class SpawnController : MonoBehaviour {
     /// <summary>
     /// 
     /// </summary>
-    private void SpawnRandomAsteroid()
+    private void SpawnAsteroid()
     {
-        SpawnPoint sp = RandomSpawnPoint();
-        spawnRotation.transform.rotation = sp.transform.rotation;
-        spawnRotation.transform.Rotate(0, Random.Range(-sp.MaxYRotation, sp.MaxYRotation), 0);
+        SpawnPoint spawnPoint = RandomSpawnPoint();
+        spawnRotation.transform.rotation = spawnPoint.transform.rotation;
+        spawnRotation.transform.Rotate(0, Random.Range(-spawnPoint.MaxYRotation, spawnPoint.MaxYRotation), 0);
 
-        
-        GameObject pooledObject = largeAsteroidPool.GetObject();
-        pooledObject.transform.position = sp.transform.position;
-        pooledObject.transform.rotation = sp.transform.rotation;
+        SpawnRandomAsteroidAtPosition(spawnPoint);
+    }
+
+    private void SpawnRandomAsteroidAtPosition(SpawnPoint spawnPoint)
+    {
+        AsteroidType type = (AsteroidType)Random.Range(0, 3);
+        GameObject pooledObject;
+        switch (type)
+        { 
+            case AsteroidType.Small:
+                pooledObject  = smallAsteroidPool.GetObject();
+            break;
+            case AsteroidType.Medium:
+                pooledObject  = mediumAsteroidPool.GetObject();
+            break;            
+            case AsteroidType.Large:
+                pooledObject  = largeAsteroidPool.GetObject();
+            break;
+            default:
+                pooledObject = largeAsteroidPool.GetObject();
+                break;
+
+        }
+        pooledObject.transform.position = spawnPoint.transform.position;
+        pooledObject.transform.rotation = spawnPoint.transform.rotation;
         pooledObject.SetActive(true);
     }
 
