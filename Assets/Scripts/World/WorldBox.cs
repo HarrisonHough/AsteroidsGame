@@ -37,7 +37,7 @@ public class WorldBox : MonoBehaviour {
         float maxPositionX = Mathf.Abs( Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 8)).x);
         float maxPositionZ = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 8)).z;
         //float worldWidth3D = ( maxPositionX - transform.position.x);
-        transform.localScale = new Vector3(maxPositionX*2,1 , maxPositionZ * 2);
+        transform.localScale = new Vector3(maxPositionX*2,1 , Mathf.Abs(maxPositionZ * 2));
         print("Collider Size " + transform.localScale);
     }
 
